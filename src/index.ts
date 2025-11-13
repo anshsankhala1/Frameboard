@@ -8,6 +8,9 @@ import { connectDB } from './config/database';
 // Load environment variables
 dotenv.config();
 
+// Debug: Log if API key is loaded
+console.log('ANTHROPIC_API_KEY loaded:', process.env.ANTHROPIC_API_KEY ? 'YES' : 'NO');
+
 // Create Express app
 const app = express();
 const httpServer = createServer(app);
@@ -23,10 +26,14 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/storyboard', require('./api/storyboard'));
-app.use('/api/scheduling', require('./api/scheduling'));
-app.use('/api/crew', require('./api/crew'));
-app.use('/api/legal', require('./api/legal'));
+import callsheetRoutes from './api/callsheet.routes';
+
+app.use('/api/callsheet', callsheetRoutes);
+// TODO: Add other routes when implemented
+// app.use('/api/storyboard', require('./api/storyboard'));
+// app.use('/api/scheduling', require('./api/scheduling'));
+// app.use('/api/crew', require('./api/crew'));
+// app.use('/api/legal', require('./api/legal'));
 
 // Socket.IO events
 io.on('connection', (socket) => {
@@ -47,5 +54,6 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  connectDB();
+  // TODO: Connect to database when other features are ready
+  // connectDB();
 });

@@ -1,54 +1,41 @@
-'use client';
+import React from "react"
+import type { Metadata } from "next"
+import "./globals.css"
 
-import { Navigation } from '@/components/shared/Navigation';
-import { UserMenu } from '@/components/shared/UserMenu';
+export const metadata: Metadata = {
+  title: "Frameboard - Film Pre-Production Made Easy",
+  description:
+    "Everything you need for film pre-production in one place. Storyboard, schedule, and manage your creative vision.",
+  generator: "v0.app",
+  icons: {
+    icon: [
+      {
+        url: "/icon-light-32x32.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icon-dark-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: "/apple-icon.png",
+  },
+}
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
-  const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl: '/placeholder-avatar.jpg',
-  };
-
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="flex">
-        {/* Sidebar */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
-            <div className="flex h-16 shrink-0 items-center">
-              <img
-                className="h-8 w-auto"
-                src="/logo.svg"
-                alt="Frameboard"
-              />
-            </div>
-            <Navigation />
-          </div>
-        </div>
-
-        {/* Main content */}
-        <div className="lg:pl-72">
-          <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
-            <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-              <div className="flex flex-1" />
-              <div className="flex items-center gap-x-4 lg:gap-x-6">
-                <UserMenu user={user} />
-              </div>
-            </div>
-          </div>
-
-          <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">
-              {children}
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
-  );
+    <html lang="en">
+      <body className="font-sans antialiased">
+        {children}
+      </body>
+    </html>
+  )
 }
