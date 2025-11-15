@@ -7,6 +7,9 @@ export interface CallSheetInput {
   // Script Information - PRIMARY INPUT
   script: string; // Required: full script that Claude will parse to extract scenes, locations, characters, etc.
 
+  // Budget Information - NEW
+  budget?: number; // Optional: Film budget for equipment and PD recommendations
+
   // Crew Information
   generalCallTime: string;
   crew?: CrewMember[]; // Optional: Claude can suggest based on script
@@ -23,8 +26,8 @@ export interface CallSheetInput {
     duration: number;
   };
 
-  // General Location (for crew availability)
-  generalLocation: string; // e.g., "Orange County"
+  // General Location (for crew availability and location finding) - UPDATED
+  generalLocation: string; // e.g., "Orange County, CA" - Used for finding nearby filming locations
 
   // Additional Info
   weatherInfo?: WeatherInfo;
@@ -43,6 +46,11 @@ export interface SceneInfo {
   dayNight: 'DAY' | 'NIGHT' | 'DAWN' | 'DUSK';
   location: string;
   estimatedTime?: string;
+  // NEW: AI-suggested details for this scene
+  suggestedLocation?: LocationSuggestion; // AI-found filming location
+  requiredEquipment?: EquipmentRecommendation[]; // AI-suggested equipment
+  requiredCrew?: string[]; // AI-suggested crew roles for this scene
+  suggestedActors?: ActorSuggestion[]; // AI-suggested actors for characters in this scene
 }
 
 export interface CrewMember {
@@ -110,10 +118,70 @@ export interface MealSchedule {
   notes?: string;
 }
 
+// NEW: Location suggestion from AI
+export interface LocationSuggestion {
+  name: string;
+  address: string;
+  description: string; // Why this location works for the scene
+  distanceFromBase?: string;
+  estimatedCost?: string;
+  permitRequired?: boolean;
+  accessibility?: string;
+  matchReason: string; // How well it matches the script requirements
+}
+
+// NEW: Equipment recommendation based on script analysis
+export interface EquipmentRecommendation {
+  category: 'Camera' | 'Lighting' | 'Sound' | 'Grip' | 'Production Design' | 'Special Effects' | 'Other';
+  item: string;
+  quantity: number;
+  reason: string; // Why this is needed for the scene
+  estimatedCost?: string;
+  priority: 'Essential' | 'Recommended' | 'Optional';
+}
+
+// NEW: Actor casting suggestion
+export interface ActorSuggestion {
+  characterName: string;
+  characterDescription: string; // From script
+  suggestedActorType: string; // Age range, physical description, etc.
+  notes: string; // Additional casting notes
+  // Note: In real implementation, would search platforms like Backstage
+  // For now, Claude will provide general casting guidance
+}
+
+// NEW: Budget breakdown by department
+export interface BudgetBreakdown {
+  totalBudget: number;
+  equipment: {
+    estimated: number;
+    breakdown: EquipmentRecommendation[];
+  };
+  productionDesign: {
+    estimated: number;
+    items: string[];
+  };
+  locations: {
+    estimated: number;
+    breakdown: { location: string; cost: string }[];
+  };
+  cast: {
+    estimated: number;
+    notes: string;
+  };
+  other: {
+    estimated: number;
+    notes: string;
+  };
+}
+
 export interface GeneratedCallSheet {
   id: string;
   input: CallSheetInput;
-  generatedContent: string; // The formatted call sheet from Claude
+  generatedContent: string; // The formatted call sheet from Claude in Excel/CSV format
   generatedAt: Date;
-  format: 'text' | 'html' | 'pdf';
+  format: 'excel' | 'csv' | 'text' | 'html' | 'pdf';
+  // NEW: Structured data for the call sheet
+  budgetBreakdown?: BudgetBreakdown;
+  excelData?: string; // CSV or Excel-formatted data
 }

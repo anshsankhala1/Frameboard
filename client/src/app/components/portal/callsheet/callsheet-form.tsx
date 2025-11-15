@@ -17,6 +17,9 @@ export default function CallSheetForm({ onGenerate, isGenerating }: CallSheetFor
     generalCallTime: "06:00",
     generalLocation: "",
 
+    // Budget - NEW
+    budget: 0,
+
     // Shooting Range
     shootingRange: {
       type: "days" as "days" | "weeks" | "months",
@@ -107,9 +110,27 @@ export default function CallSheetForm({ onGenerate, isGenerating }: CallSheetFor
                 value={formData.generalLocation}
                 onChange={(e) => setFormData({ ...formData, generalLocation: e.target.value })}
                 className="w-full px-4 py-2 border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="e.g., Orange County"
+                placeholder="e.g., Orange County, CA"
               />
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold mb-2">Total Film Budget</label>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-gray-600">$</span>
+              <input
+                type="number"
+                min="0"
+                value={formData.budget || ""}
+                onChange={(e) => setFormData({ ...formData, budget: parseInt(e.target.value) || 0 })}
+                className="w-full pl-8 pr-4 py-2 border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="e.g., 50000"
+              />
+            </div>
+            <p className="text-xs text-gray-500 mt-1">
+              AI will recommend equipment and find actors within your budget range
+            </p>
           </div>
 
           <div>

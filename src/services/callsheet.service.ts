@@ -1,9 +1,11 @@
 import Anthropic from '@anthropic-ai/sdk';
 import type { CallSheetInput, GeneratedCallSheet } from '../types/callsheet';
+import { SearchService } from './search.service';
+import { ExcelGeneratorService } from './excel-generator.service';
 
 export class CallSheetService {
   /**
-   * Generate a comprehensive call sheet using Claude API
+   * Generate a comprehensive call sheet using Claude API + Web Search + Excel
    */
   static async generateCallSheet(input: CallSheetInput): Promise<GeneratedCallSheet> {
     try {
@@ -14,36 +16,198 @@ export class CallSheetService {
         throw new Error('ANTHROPIC_API_KEY environment variable is not set');
       }
 
-      // Initialize Anthropic client with API key from environment
-      const anthropic = new Anthropic({
-        apiKey: apiKey,
-      });
+      // Step 1: Analyze script with Claude to extract scenes, characters, equipment needs
+      const anthropic = new Anthropic({ apiKey });
+      console.log('Step 1: Analyzing script with Claude...');
 
-      const prompt = this.buildCallSheetPrompt(input);
-
-      const message = await anthropic.messages.create({
+      const analysisPrompt = this.buildScriptAnalysisPrompt(input);
+      const analysisMessage = await anthropic.messages.create({
         model: 'claude-sonnet-4-5-20250929',
-        max_tokens: 4096,
-        messages: [
-          {
-            role: 'user',
-            content: prompt,
-          },
-        ],
+        max_tokens: 6000,
+        messages: [{ role: 'user', content: analysisPrompt }],
       });
 
-      const generatedContent = message.content[0].type === 'text'
-        ? message.content[0].text
+      const analysisText = analysisMessage.content[0].type === 'text'
+        ? analysisMessage.content[0].text
         : '';
+
+      // Parse the analysis to get structured data
+      let analysisData: any = {};
+      try {
+        // Try to extract JSON from Claude's response
+        console.log('Raw analysis response length:', analysisText.length);
+
+        // First try: Look for JSON in code blocks
+        let jsonText = '';
+        const codeBlockMatch = analysisText.match(/```(?:json)?\s*\n([\s\S]*?)\n```/);
+        if (codeBlockMatch) {
+          jsonText = codeBlockMatch[1];
+        } else {
+          // Second try: Look for raw JSON object
+          const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
+          if (jsonMatch) {
+            jsonText = jsonMatch[0];
+          }
+        }
+
+        if (jsonText) {
+          // Clean up common JSON issues while preserving string content
+          jsonText = jsonText
+            .replace(/,(\s*[}\]])/g, '$1') // Remove trailing commas
+            .trim();
+
+          console.log('Attempting to parse JSON, first 500 chars:', jsonText.substring(0, 500));
+
+          try {
+            analysisData = JSON.parse(jsonText);
+            console.log('Successfully parsed JSON');
+          } catch (parseError) {
+            // If initial parse fails, try more aggressive cleaning
+            console.log('First parse failed, trying aggressive cleaning...');
+            const cleanedJson = jsonText
+              .replace(/[\n\r\t]/g, ' ') // Remove all whitespace chars
+              .replace(/\s+/g, ' ') // Normalize spaces
+              .replace(/,(\s*[}\]])/g, '$1'); // Remove trailing commas again
+
+            analysisData = JSON.parse(cleanedJson);
+            console.log('Successfully parsed JSON after cleaning');
+          }
+        } else {
+          console.error('No JSON found in response');
+        }
+      } catch (e) {
+        console.error('Error parsing analysis JSON:', e);
+        console.error('Failed JSON text (first 1000 chars):', analysisText.substring(0, 1000));
+        // Use empty data as fallback
+        analysisData = { scenes: [], characters: [], equipment: [] };
+      }
+
+      console.log('Script analysis complete. Found:', {
+        scenes: analysisData.scenes?.length || 0,
+        characters: analysisData.characters?.length || 0,
+        equipment: analysisData.equipment?.length || 0,
+      });
+
+      // Step 2: Search for real filming locations for each scene
+      console.log('Step 2: Searching for real filming locations...');
+      if (analysisData.scenes && analysisData.scenes.length > 0) {
+        const locationPromises = analysisData.scenes.slice(0, 5).map(async (scene: any) => {
+          const locations = await SearchService.findFilmingLocations(
+            scene.description || '',
+            scene.location || '',
+            input.generalLocation
+          );
+          return {
+            sceneLocation: scene.location,
+            sceneNumber: scene.sceneNumber,
+            suggestions: locations,
+          };
+        });
+
+        const locationResults = await Promise.all(locationPromises);
+        analysisData.locationSuggestions = locationResults;
+
+        // Add suggested location to each scene
+        analysisData.scenes = analysisData.scenes.map((scene: any) => {
+          const locationMatch = locationResults.find(
+            (loc) => loc.sceneNumber === scene.sceneNumber
+          );
+          if (locationMatch && locationMatch.suggestions.length > 0) {
+            scene.suggestedLocation = locationMatch.suggestions[0].venueName +
+              ' - ' + locationMatch.suggestions[0].address;
+          }
+          return scene;
+        });
+      }
+
+      // Step 3: Search for actors on casting platforms
+      console.log('Step 3: Finding budget-friendly casting suggestions...');
+      if (analysisData.characters && analysisData.characters.length > 0) {
+        const castingPromises = analysisData.characters.slice(0, 5).map(async (char: any) => {
+          const castingSuggestions = await SearchService.findActors(
+            char.name || char.character || '',
+            char.description || '',
+            input.generalLocation,
+            input.budget // Pass budget for filtering
+          );
+          return {
+            character: char.name || char.character,
+            description: char.description,
+            callTime: char.callTime || input.generalCallTime,
+            makeup: char.makeup || 'Standard',
+            wardrobe: char.wardrobe || 'See costume designer',
+            onSet: char.onSet || 'TBD',
+            notes: char.notes || '',
+            castingType: castingSuggestions[0]?.castingType || '',
+            suggestedActors: castingSuggestions[0]?.suggestedActors || 'Search on Backstage',
+            platform: castingSuggestions[0]?.platform || 'Backstage / Actors Access',
+          };
+        });
+
+        analysisData.cast = await Promise.all(castingPromises);
+      }
+
+      // Step 4: Search for equipment rental companies
+      console.log('Step 4: Finding equipment rental companies...');
+      if (analysisData.equipment && analysisData.equipment.length > 0) {
+        const equipmentWithRentals = await Promise.all(
+          analysisData.equipment.slice(0, 10).map(async (equip: any) => {
+            const rentalInfo = await SearchService.findEquipmentRentals(
+              equip.category || equip.item || '',
+              input.generalLocation
+            );
+            return {
+              ...equip,
+              rentalCompany: rentalInfo.rentalCompany || 'Local rental house',
+              contact: rentalInfo.contact || 'TBD',
+              cost: rentalInfo.estimatedCost || equip.cost || 'Quote needed',
+            };
+          })
+        );
+        analysisData.equipment = equipmentWithRentals;
+      }
+
+      // Step 5: Flatten location suggestions for Excel
+      const locationsForExcel: any[] = [];
+      if (analysisData.locationSuggestions) {
+        analysisData.locationSuggestions.forEach((locGroup: any) => {
+          if (locGroup.suggestions && locGroup.suggestions.length > 0) {
+            locGroup.suggestions.forEach((loc: any) => {
+              locationsForExcel.push({
+                sceneLocation: locGroup.sceneLocation,
+                venueName: loc.venueName,
+                address: loc.address,
+                matchReason: loc.matchReason,
+                distance: loc.distance,
+                permitCost: loc.permitCost,
+                contact: loc.contact,
+                accessibility: loc.accessibility,
+                parking: loc.notes || '',
+                notes: '',
+              });
+            });
+          }
+        });
+      }
+      analysisData.locations = locationsForExcel;
+
+      // Step 6: Generate Excel file
+      console.log('Step 5: Generating Excel call sheet...');
+      const excelBuffer = await ExcelGeneratorService.generateCallSheetExcel(
+        input,
+        analysisData
+      );
 
       const callSheet: GeneratedCallSheet = {
         id: `cs-${Date.now()}`,
         input,
-        generatedContent,
+        generatedContent: `Call sheet generated with ${analysisData.scenes?.length || 0} scenes, ${analysisData.cast?.length || 0} characters, ${analysisData.equipment?.length || 0} equipment items`,
         generatedAt: new Date(),
-        format: 'text',
+        format: 'excel',
+        excelData: excelBuffer.toString('base64'), // Store as base64 for transmission
       };
 
+      console.log('Call sheet generation complete!');
       return callSheet;
     } catch (error) {
       console.error('Error generating call sheet:', error);
@@ -52,140 +216,76 @@ export class CallSheetService {
   }
 
   /**
-   * Build a detailed prompt for Claude to generate the call sheet
+   * Build script analysis prompt for Claude
    */
-  private static buildCallSheetPrompt(input: CallSheetInput): string {
-    const {
-      productionTitle,
-      shootDate,
-      shootingDayNumber,
-      generalCallTime,
-      script,
-      scenes,
-      cast,
-      crew,
-      location,
-      shootingRange,
-      generalLocation,
-      weatherInfo,
-      safetyInfo,
-      mealSchedule,
-    } = input;
+  private static buildScriptAnalysisPrompt(input: CallSheetInput): string {
+    const { script, budget, generalLocation } = input;
 
-    return `You are an experienced Assistant Director creating a professional film call sheet.
+    return `You are a professional Assistant Director analyzing a film script.
 
-# YOUR PRIMARY TASK
-Parse the provided script and automatically extract:
-1. All scenes with scene numbers, INT/EXT, location names, DAY/NIGHT, and descriptions
-2. All characters that appear in the script
-3. Location details mentioned in the script
-4. Any special production notes or requirements from the script
-
-Then use this extracted information along with the production details below to generate a comprehensive, well-formatted call sheet.
-
-# SCRIPT TO ANALYZE
+SCRIPT:
 ${script}
 
-# PRODUCTION DETAILS
-- Production Title: ${productionTitle}
-- Shoot Date: ${shootDate}
-- Shooting Day Number: Day ${shootingDayNumber}
-- General Call Time: ${generalCallTime}
-- Shooting Range: ${shootingRange.duration} ${shootingRange.type}
-- General Location: ${generalLocation}
+PRODUCTION INFO:
+- Budget: ${budget ? `$${budget.toLocaleString()}` : 'TBD'}
+- Filming Location: ${generalLocation}
 
-${location ? `
-# LOCATION INFORMATION (Provided)
-- Location Name: ${location.name}
-- Address: ${location.address}
-${location.parkingInfo ? `- Parking: ${location.parkingInfo}` : ''}
-${location.accessInstructions ? `- Access Instructions: ${location.accessInstructions}` : ''}
-${location.basecampAddress ? `- Basecamp Address: ${location.basecampAddress}` : ''}
-${location.basecampNotes ? `- Basecamp Notes: ${location.basecampNotes}` : ''}
-` : '# LOCATION INFORMATION\nExtract location information from the script'}
+TASK: Analyze this script and extract production information. Return ONLY valid JSON, no other text.
 
-${cast && cast.length > 0 ? `
-# CAST (Provided)
-${cast.map(c => `
-${c.characterName} (${c.actorName})
-- Call Time: ${c.callTime}
-${c.wardrobeNotes ? `- Wardrobe: ${c.wardrobeNotes}` : ''}
-${c.makeupNotes ? `- Makeup: ${c.makeupNotes}` : ''}
-${c.specialInstructions ? `- Special Instructions: ${c.specialInstructions}` : ''}
-${c.contact ? `- Contact: ${c.contact}` : ''}
-`).join('\n')}
-` : '# CAST\nExtract all characters from the script and suggest appropriate call times based on their scenes'}
+CRITICAL: Your response must be ONLY the JSON object below. Do not include explanations, markdown, or code blocks. Just raw JSON.
 
-${crew && crew.length > 0 ? `
-# CREW (Provided)
-${crew.map(c => `
-${c.role} - ${c.name} (${c.department})
-${c.callTime ? `- Call Time: ${c.callTime}` : `- Call Time: ${generalCallTime}`}
-${c.contact ? `- Contact: ${c.contact}` : ''}
-${c.notes ? `- Notes: ${c.notes}` : ''}
-`).join('\n')}
-` : '# CREW\nSuggest standard crew roles based on the script requirements'}
+{
+  "scenes": [
+    {
+      "sceneNumber": "1",
+      "pages": "2/8",
+      "intExt": "INT",
+      "location": "COFFEE SHOP",
+      "dayNight": "DAY",
+      "description": "Two friends meet",
+      "cast": "Alice, Bob",
+      "crewNeeded": "Camera, Sound",
+      "equipment": "DSLR camera"
+    }
+  ],
+  "characters": [
+    {
+      "character": "Alice",
+      "description": "Female 25-30",
+      "scenes": "1, 3, 5",
+      "callTime": "08:00 AM",
+      "makeup": "Natural",
+      "wardrobe": "Business casual",
+      "notes": "None"
+    }
+  ],
+  "equipment": [
+    {
+      "category": "Camera",
+      "item": "Sony A7S III",
+      "quantity": 1,
+      "reason": "Scenes 1-5",
+      "priority": "Essential",
+      "cost": "$200/day"
+    }
+  ],
+  "budget": {
+    "camera": "$500",
+    "lighting": "$300",
+    "sound": "$200",
+    "productionDesign": "$400",
+    "locations": "$600",
+    "cast": "$1000",
+    "other": "$500"
+  }
+}
 
-${scenes && scenes.length > 0 ? `
-# SCENES (Manually Provided - use these instead of extracting)
-${scenes.map((scene) => `
-Scene ${scene.sceneNumber} - ${scene.intExt}. ${scene.location} - ${scene.dayNight}
-- Script Pages: ${scene.scriptPages}
-- Description: ${scene.description}
-${scene.estimatedTime ? `- Estimated Time: ${scene.estimatedTime}` : ''}
-`).join('\n')}
-` : ''}
-
-${weatherInfo ? `
-# WEATHER FORECAST
-- Forecast: ${weatherInfo.forecast}
-${weatherInfo.highTemp ? `- High: ${weatherInfo.highTemp}°F` : ''}
-${weatherInfo.lowTemp ? `- Low: ${weatherInfo.lowTemp}°F` : ''}
-${weatherInfo.sunrise ? `- Sunrise: ${weatherInfo.sunrise}` : ''}
-${weatherInfo.sunset ? `- Sunset: ${weatherInfo.sunset}` : ''}
-` : ''}
-
-${mealSchedule ? `
-# MEAL SCHEDULE
-${mealSchedule.breakfast ? `- Breakfast: ${mealSchedule.breakfast}` : ''}
-${mealSchedule.lunch ? `- Lunch: ${mealSchedule.lunch}` : ''}
-${mealSchedule.dinner ? `- Dinner: ${mealSchedule.dinner}` : ''}
-${mealSchedule.catering ? `- Catering: ${mealSchedule.catering}` : ''}
-${mealSchedule.notes ? `- Notes: ${mealSchedule.notes}` : ''}
-` : ''}
-
-${safetyInfo ? `
-# SAFETY INFORMATION
-${safetyInfo.emergencyContacts.map(ec => `- ${ec.role}: ${ec.name} - ${ec.phone}`).join('\n')}
-${safetyInfo.nearestHospital ? `
-Nearest Hospital:
-- ${safetyInfo.nearestHospital.name}
-- ${safetyInfo.nearestHospital.address}
-- ${safetyInfo.nearestHospital.phone}
-${safetyInfo.nearestHospital.distance ? `- Distance: ${safetyInfo.nearestHospital.distance}` : ''}
-` : ''}
-${safetyInfo.safetyOfficer ? `
-Safety Officer: ${safetyInfo.safetyOfficer.name} - ${safetyInfo.safetyOfficer.contact}
-` : ''}
-${safetyInfo.specialSafetyNotes ? `
-Special Safety Notes:
-${safetyInfo.specialSafetyNotes.map(note => `- ${note}`).join('\n')}
-` : ''}
-` : ''}
-
-# OUTPUT REQUIREMENTS
-Create a professional, industry-standard call sheet with the following structure:
-1. Header with production info
-2. Clear call times (general and specific for each cast/crew member)
-3. Detailed shooting schedule with ALL scenes extracted from the script (with scene numbers, INT/EXT, location, DAY/NIGHT, page count, and brief description)
-4. Complete cast list with all characters from the script
-5. Organized crew list by department
-6. Location details (extracted from script or use provided info)
-7. Weather information (if provided)
-8. Safety contacts and procedures (if provided)
-9. Meal schedule (if provided)
-10. Any special notes or requirements
-
-Format it professionally and make it easy to read and reference on set. Use clear sections, bullet points, and emphasis where appropriate. Make sure to extract ALL relevant information from the script and present it in a logical, industry-standard format that production professionals would expect to see.`;
+Rules:
+- Return ONLY JSON, starting with { and ending with }
+- Extract ALL scenes from script
+- List ALL characters
+- Keep descriptions short (under 50 chars)
+- Use realistic equipment for ${budget ? `$${budget.toLocaleString()}` : 'indie'} budget
+- Estimate costs for ${generalLocation}`;
   }
 }

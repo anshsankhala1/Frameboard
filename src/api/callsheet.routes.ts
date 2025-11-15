@@ -6,7 +6,7 @@ const router = Router();
 
 /**
  * POST /api/callsheet/generate
- * Generate a call sheet using Claude API
+ * Generate a call sheet using Claude API and return Excel file
  */
 router.post('/generate', async (req: Request, res: Response) => {
   try {
@@ -26,18 +26,49 @@ router.post('/generate', async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Script is required - please provide the script text for Claude to analyze' });
     }
 
-    // Generate call sheet
+    console.log('Starting call sheet generation with AI search...');
+
+    // Generate call sheet with AI search and Excel generation
     const generatedCallSheet = await CallSheetService.generateCallSheet(callSheetInput);
 
+    // Return JSON response with base64 Excel data
     return res.status(200).json({
       success: true,
-      callSheet: generatedCallSheet,
+      callSheet: {
+        id: generatedCallSheet.id,
+        format: generatedCallSheet.format,
+        generatedContent: generatedCallSheet.generatedContent,
+        generatedAt: generatedCallSheet.generatedAt,
+        // Excel data is base64 encoded
+        excelData: generatedCallSheet.excelData,
+        filename: `CallSheet_${callSheetInput.productionTitle.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.xlsx`,
+      },
     });
   } catch (error) {
     console.error('Error in call sheet generation:', error);
     return res.status(500).json({
       success: false,
       error: 'Failed to generate call sheet',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+/**
+ * GET /api/callsheet/download/:id
+ * Download generated Excel call sheet
+ */
+router.get('/download/:id', async (_req: Request, res: Response) => {
+  try {
+    // In a real implementation, you'd fetch the call sheet from database by ID
+    // For now, we'll return an error message to implement this later
+    return res.status(501).json({
+      error: 'Download endpoint not yet implemented',
+      message: 'Please use the Excel data from the generation response',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: 'Download failed',
       message: error instanceof Error ? error.message : 'Unknown error',
     });
   }
