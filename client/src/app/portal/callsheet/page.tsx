@@ -6,13 +6,14 @@ import CallSheetForm from "@/app/components/portal/callsheet/callsheet-form"
 import CallSheetPreview from "@/app/components/portal/callsheet/callsheet-preview"
 
 export default function CallSheetPage() {
-  const [generatedCallSheet, setGeneratedCallSheet] = useState<string | null>(null)
+  const [generatedCallSheet, setGeneratedCallSheet] = useState<any>(null)
   const [isGenerating, setIsGenerating] = useState(false)
 
   const handleGenerate = async (formData: any) => {
     setIsGenerating(true)
     try {
-      const response = await fetch('http://localhost:3001/api/callsheet/generate', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'
+      const response = await fetch(`${apiUrl}/api/callsheet/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,15 +24,50 @@ export default function CallSheetPage() {
       const data = await response.json()
 
       if (data.success) {
-        setGeneratedCallSheet(data.callSheet.generatedContent)
+        // Store the entire call sheet object including Excel data
+        setGeneratedCallSheet(data.callSheet)
+
+        // Automatically download the Excel file
+        if (data.callSheet.excelData && data.callSheet.filename) {
+          downloadExcelFile(data.callSheet.excelData, data.callSheet.filename)
+        }
       } else {
-        alert('Failed to generate call sheet: ' + data.message)
+        alert('Failed to generate call sheet: ' + data.error || data.message)
       }
     } catch (error) {
       console.error('Error generating call sheet:', error)
       alert('Failed to generate call sheet. Please try again.')
     } finally {
       setIsGenerating(false)
+    }
+  }
+
+  const downloadExcelFile = (base64Data: string, filename: string) => {
+    try {
+      // Convert base64 to binary
+      const binaryString = atob(base64Data)
+      const bytes = new Uint8Array(binaryString.length)
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i)
+      }
+
+      // Create blob and download
+      const blob = new Blob([bytes], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      })
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(url)
+
+      console.log('Excel file downloaded:', filename)
+    } catch (error) {
+      console.error('Error downloading Excel file:', error)
+      alert('Failed to download Excel file. Please try again.')
     }
   }
 
@@ -56,9 +92,20 @@ export default function CallSheetPage() {
           {/* Preview Section */}
           <div>
             <CallSheetPreview
-              content={generatedCallSheet}
+              content={generatedCallSheet?.generatedContent}
               isGenerating={isGenerating}
             />
+            {generatedCallSheet && generatedCallSheet.excelData && (
+              <div className="mt-4">
+                <button
+                  onClick={() => downloadExcelFile(generatedCallSheet.excelData, generatedCallSheet.filename)}
+                  className="w-full px-6 py-4 bg-green-500 text-white font-bold text-lg border-4 border-black hover:bg-green-600 transition-all duration-300 hover:translate-x-1 hover:translate-y-1"
+                  style={{ boxShadow: "6px 6px 0px rgba(0,0,0,1)" }}
+                >
+                  📥 DOWNLOAD EXCEL CALL SHEET
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
