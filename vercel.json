@@ -1,12 +1,9 @@
 {
-  "buildCommand": "cd client && pnpm build",
-  "outputDirectory": "client/.next",
-  "installCommand": "cd client && pnpm install",
-  "framework": "nextjs",
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/client/$1"
+      "src": "client/package.json",
+      "use": "@vercel/next"
     }
   ]
 }
