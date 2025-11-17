@@ -11,6 +11,33 @@ if (!process.env.OPENAI_API_KEY) {
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
+const REALISTIC_STYLE = "high-resolution realistic photo, natural lighting, real human proportions, neutral color grading, photojournalistic style, clean composition, consistent actor appearance, no cinematic lighting, no stylization, no filters, no hdr";
+
+async function generateLocalImage(prompt: string): Promise<string | null> {
+  try {
+    const res = await fetch("http://127.0.0.1:7860/sdapi/v1/txt2img", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt,
+        steps: 25,
+        width: 512,
+        height: 512
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.images && data.images.length > 0) {
+      return `data:image/png;base64,${data.images[0]}`;
+    }
+
+    return null;
+  } catch (err) {
+    console.error("Image generation failed:", err);
+    return null;
+  }
+}
 
 export class StoryboardService {
   async generateStoryboardFromScript(script: string): Promise<StoryboardScene[]> {
@@ -55,10 +82,18 @@ export class StoryboardService {
           continue;
         }
 
-        storyboard.push({
-          scene,
-          visualDescription: imagePrompt.choices[0].message.content
-        });
+       const visual = imagePrompt.choices[0].message.content;
+
+// generate image using local SD
+const imageUrl = await generateLocalImage(`${visual}, ${REALISTIC_STYLE}`);
+
+
+storyboard.push({
+  scene,
+  visualDescription: visual,
+  imageUrl,
+});
+
       }
 
       if (storyboard.length === 0) {
