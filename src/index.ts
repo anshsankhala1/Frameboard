@@ -27,10 +27,11 @@ app.use(express.json());
 
 // Routes
 import callsheetRoutes from './api/callsheet.routes';
+import storyboardRoutes from './api/storyboard.routes';
 
 app.use('/api/callsheet', callsheetRoutes);
+app.use('/api/storyboard', storyboardRoutes);
 // TODO: Add other routes when implemented
-// app.use('/api/storyboard', require('./api/storyboard'));
 // app.use('/api/scheduling', require('./api/scheduling'));
 // app.use('/api/crew', require('./api/crew'));
 // app.use('/api/legal', require('./api/legal'));
