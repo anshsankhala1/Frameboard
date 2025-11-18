@@ -1,18 +1,26 @@
 "use client"
 
-import { CalendarIcon, Bell, Settings, User, LogOut, ChevronDown } from "lucide-react"
+import { Bell, Settings, User, LogOut, ChevronDown } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
+import { useAuth } from "@/app/contexts/AuthContext"
+import FrameboardLogo from "../FrameboardLogo"
 
 export default function PortalHeader() {
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const { user, logout } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+    window.location.href = '/auth/signin'
+  }
 
   return (
     <header className="border-b-4 border-blue-500 bg-white sticky top-0 z-50">
       <div className="flex items-center justify-between px-8 py-4 max-w-7xl mx-auto">
         {/* Logo */}
         <Link href="/portal" className="flex items-center gap-2 hover:scale-105 transition-all duration-300">
-          <CalendarIcon className="w-8 h-8" strokeWidth={3} />
+          <FrameboardLogo className="w-8 h-8" />
           <span className="text-2xl font-anton tracking-wide">FRAMEBOARD</span>
         </Link>
 
@@ -25,13 +33,7 @@ export default function PortalHeader() {
             Projects
           </Link>
           <Link
-            href="/portal/schedule"
-            className="font-semibold text-base hover:text-purple-600 hover:-translate-y-0.5 transition-all duration-300"
-          >
-            Schedule
-          </Link>
-          <Link
-            href="/portal/storyboard"
+            href="/portal/storyboard/new"
             className="font-semibold text-base hover:text-pink-600 hover:-translate-y-0.5 transition-all duration-300"
           >
             Storyboard
@@ -43,10 +45,10 @@ export default function PortalHeader() {
             Call Sheets
           </Link>
           <Link
-            href="/portal/team"
-            className="font-semibold text-base hover:text-green-600 hover:-translate-y-0.5 transition-all duration-300"
+            href="/portal/ai"
+            className="font-semibold text-base hover:text-purple-600 hover:-translate-y-0.5 transition-all duration-300"
           >
-            Team
+            AI Assistant
           </Link>
 
           {/* Notifications */}
@@ -64,7 +66,7 @@ export default function PortalHeader() {
               <div className="w-8 h-8 bg-blue-500 border-2 border-black rounded-full flex items-center justify-center">
                 <User className="w-4 h-4 text-white" strokeWidth={3} />
               </div>
-              <span className="font-semibold text-sm">John Doe</span>
+              <span className="font-semibold text-sm">{user?.name || 'User'}</span>
               <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showUserMenu ? 'rotate-180' : ''}`} />
             </button>
 
@@ -75,8 +77,8 @@ export default function PortalHeader() {
                 style={{ boxShadow: "4px 4px 0px rgba(0,0,0,1)" }}
               >
                 <div className="p-3 border-b-2 border-gray-200">
-                  <div className="font-bold text-sm">John Doe</div>
-                  <div className="text-xs text-gray-600">john@example.com</div>
+                  <div className="font-bold text-sm">{user?.name || 'User'}</div>
+                  <div className="text-xs text-gray-600">{user?.email || ''}</div>
                 </div>
 
                 <Link
@@ -87,13 +89,13 @@ export default function PortalHeader() {
                   <span className="text-sm font-semibold">Settings</span>
                 </Link>
 
-                <Link
-                  href="/"
-                  className="flex items-center gap-3 px-4 py-3 hover:bg-red-50 transition-all duration-200 border-t-2 border-gray-200"
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center gap-3 px-4 py-3 hover:bg-red-50 transition-all duration-200 border-t-2 border-gray-200 text-left"
                 >
                   <LogOut className="w-4 h-4" strokeWidth={2} />
                   <span className="text-sm font-semibold">Log Out</span>
-                </Link>
+                </button>
               </div>
             )}
           </div>

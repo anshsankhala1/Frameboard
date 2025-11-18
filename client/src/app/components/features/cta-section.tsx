@@ -32,23 +32,6 @@ export default function CTASection() {
           </button>
         </div>
 
-        <div className="mt-12 flex items-center justify-center gap-8 flex-wrap">
-          <div className="text-center">
-            <div className="font-black text-3xl mb-1">500+</div>
-            <div className="text-sm font-bold text-gray-700">Productions</div>
-          </div>
-          <div className="w-px h-12 bg-black"></div>
-          <div className="text-center">
-            <div className="font-black text-3xl mb-1">10k+</div>
-            <div className="text-sm font-bold text-gray-700">Hours Saved</div>
-          </div>
-          <div className="w-px h-12 bg-black"></div>
-          <div className="text-center">
-            <div className="font-black text-3xl mb-1">98%</div>
-            <div className="text-sm font-bold text-gray-700">Satisfaction</div>
-          </div>
-        </div>
-
         <div className="mt-12 pt-8 border-t-2 border-black">
           <p className="text-sm font-bold text-gray-700">
             No credit card required • Free 14-day trial • Cancel anytime

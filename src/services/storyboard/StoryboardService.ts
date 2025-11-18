@@ -11,30 +11,32 @@ if (!process.env.OPENAI_API_KEY) {
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
-const REALISTIC_STYLE = "high-resolution realistic photo, natural lighting, real human proportions, neutral color grading, photojournalistic style, clean composition, consistent actor appearance, no cinematic lighting, no stylization, no filters, no hdr";
-
-async function generateLocalImage(prompt: string): Promise<string | null> {
+async function generateDalleImage(prompt: string): Promise<string | null> {
   try {
-    const res = await fetch("http://127.0.0.1:7860/sdapi/v1/txt2img", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        prompt,
-        steps: 25,
-        width: 512,
-        height: 512
-      }),
+    // Make the prompt very abstract and artistic to avoid DALL-E safety violations
+    // Focus only on setting, mood, and composition - remove any action/violence references
+    const abstractPrompt = prompt
+      .replace(/falls?|falling|dropped?|crash(es|ed|ing)?/gi, 'descends')
+      .replace(/attack(s|ed|ing)?|fight(s|ing)?|hit(s|ting)?/gi, 'confronts')
+      .replace(/kill(s|ed|ing)?|dead|dies?|dying/gi, 'overcome')
+      .replace(/gun(s)?|weapon(s)?|knife|sword/gi, 'tool')
+      .replace(/blood|gore|violent/gi, 'intense');
+
+    const sanitizedPrompt = `Film storyboard sketch: ${abstractPrompt}. Pencil drawing style, simple composition, artistic representation.`;
+
+    const response = await openai.images.generate({
+      model: process.env.OPENAI_IMAGE_MODEL || "dall-e-3",
+      prompt: sanitizedPrompt,
+      n: 1,
+      size: "1024x1024",
     });
 
-    const data = await res.json();
+    return response.data[0]?.url || null;
+  } catch (err: any) {
+    // Log the error but don't fail the entire storyboard
+    console.error("DALL-E image generation failed:", err?.message || err);
 
-    if (data.images && data.images.length > 0) {
-      return `data:image/png;base64,${data.images[0]}`;
-    }
-
-    return null;
-  } catch (err) {
-    console.error("Image generation failed:", err);
+    // Return null so the storyboard continues without this image
     return null;
   }
 }
@@ -47,10 +49,10 @@ export class StoryboardService {
         model: "gpt-4",
         messages: [{
           role: "system",
-          content: "You are a professional storyboard artist and film director."
+          content: "You are a professional storyboard artist. Break scripts into 5-8 key visual scenes. Return ONLY a numbered list of scene descriptions, one per line."
         }, {
           role: "user",
-          content: `Analyze this script and break it into key visual scenes: ${script}`
+          content: `Break this script into 5-8 key storyboard scenes:\n\n${script}`
         }]
       });
 
@@ -61,7 +63,8 @@ export class StoryboardService {
       // For each scene, generate a visual description
       const scenes = sceneAnalysis.choices[0].message.content
         .split('\n')
-        .filter(scene => scene.trim());
+        .filter(scene => scene.trim() && (scene.match(/^\d+\./) || scene.match(/^Scene/)))
+        .slice(0, 8); // Limit to 8 scenes max to avoid long waits
 
       const storyboard: StoryboardScene[] = [];
 
@@ -70,10 +73,10 @@ export class StoryboardService {
           model: "gpt-4",
           messages: [{
             role: "system",
-            content: "Create a detailed visual description for an AI image generator."
+            content: "You are a storyboard sketch artist. Create simple, artistic visual descriptions for pencil-drawn storyboard frames. Focus ONLY on: camera angle, setting/location, lighting, and character positions. Use neutral, non-violent language. Describe as if creating a sketch, not a photograph."
           }, {
             role: "user",
-            content: `Create a cinematic shot description for: ${scene}`
+            content: `Create a simple pencil sketch description for this storyboard frame: ${scene}. Describe only the visual composition - camera angle, setting, lighting, character placement. Keep it artistic and safe.`
           }]
         });
 
@@ -84,8 +87,8 @@ export class StoryboardService {
 
        const visual = imagePrompt.choices[0].message.content;
 
-// generate image using local SD
-const imageUrl = await generateLocalImage(`${visual}, ${REALISTIC_STYLE}`);
+// generate image using DALL-E
+const imageUrl = await generateDalleImage(visual);
 
 
 storyboard.push({

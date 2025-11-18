@@ -26,11 +26,17 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+import authRoutes from './api/auth.routes';
 import callsheetRoutes from './api/callsheet.routes';
 import storyboardRoutes from './api/storyboard.routes';
+import aiRoutes from './api/ai.routes';
+import projectsRoutes from './api/projects.routes';
 
+app.use('/api/auth', authRoutes);
 app.use('/api/callsheet', callsheetRoutes);
 app.use('/api/storyboard', storyboardRoutes);
+app.use('/api/ai', aiRoutes);
+app.use('/api/projects', projectsRoutes);
 // TODO: Add other routes when implemented
 // app.use('/api/scheduling', require('./api/scheduling'));
 // app.use('/api/crew', require('./api/crew'));
@@ -53,8 +59,15 @@ io.on('connection', (socket) => {
 
 // Start server
 const PORT = process.env.PORT || 5000;
-httpServer.listen(PORT, () => {
+httpServer.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
-  // TODO: Connect to database when other features are ready
-  // connectDB();
+
+  // Connect to MongoDB
+  try {
+    await connectDB();
+    console.log('MongoDB connected successfully');
+  } catch (error) {
+    console.error('MongoDB connection failed:', error);
+    console.error('Server will continue running but database operations will fail');
+  }
 });

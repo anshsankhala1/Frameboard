@@ -1,7 +1,7 @@
 "use client"
 
-import { CalendarIcon } from "lucide-react"
 import Link from "next/link"
+import FrameboardLogo from "./FrameboardLogo"
 
 export default function Header() {
   return (
@@ -9,7 +9,7 @@ export default function Header() {
       <div className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 hover:scale-105 transition-all duration-300">
-          <CalendarIcon className="w-8 h-8" strokeWidth={3} />
+          <FrameboardLogo className="w-8 h-8" />
           <span className="text-2xl font-anton tracking-wide">FRAMEBOARD</span>
         </Link>
 

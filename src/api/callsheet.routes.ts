@@ -1,15 +1,23 @@
 import { Router, Request, Response } from 'express';
 import { CallSheetService } from '../services/callsheet.service';
 import type { CallSheetInput } from '../types/callsheet';
+import { Project } from '../models/Project';
+import type { CallSheetProject } from '../types/project';
+import { authMiddleware } from '../middleware/auth';
 
 const router = Router();
 
 /**
  * POST /api/callsheet/generate
  * Generate a call sheet using Claude API and return Excel file
+ * Requires authentication
  */
-router.post('/generate', async (req: Request, res: Response) => {
+router.post('/generate', authMiddleware, async (req: Request, res: Response) => {
   try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+
     const callSheetInput: CallSheetInput = req.body;
 
     // Validate required fields
@@ -26,22 +34,45 @@ router.post('/generate', async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Script is required - please provide the script text for Claude to analyze' });
     }
 
-    console.log('Starting call sheet generation with AI search...');
+    console.log(`User ${req.user.email} generating call sheet: ${callSheetInput.productionTitle}`);
 
     // Generate call sheet with AI search and Excel generation
     const generatedCallSheet = await CallSheetService.generateCallSheet(callSheetInput);
+
+    // Save to user's projects
+    const filename = `CallSheet_${callSheetInput.productionTitle.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.xlsx`;
+    const projectData: CallSheetProject = {
+      productionTitle: callSheetInput.productionTitle,
+      shootDate: callSheetInput.shootDate,
+      excelData: generatedCallSheet.excelData,
+      generatedContent: generatedCallSheet.generatedContent,
+      filename,
+    };
+
+    // Create project in MongoDB
+    const project = new Project({
+      userId: req.user.id,
+      title: callSheetInput.productionTitle,
+      type: 'callsheet',
+      data: projectData,
+    });
+
+    await project.save();
+
+    console.log(`Call sheet saved to user ${req.user.email}'s projects with ID: ${project._id}`);
 
     // Return JSON response with base64 Excel data
     return res.status(200).json({
       success: true,
       callSheet: {
         id: generatedCallSheet.id,
+        projectId: project._id.toString(),
         format: generatedCallSheet.format,
         generatedContent: generatedCallSheet.generatedContent,
         generatedAt: generatedCallSheet.generatedAt,
         // Excel data is base64 encoded
         excelData: generatedCallSheet.excelData,
-        filename: `CallSheet_${callSheetInput.productionTitle.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.xlsx`,
+        filename,
       },
     });
   } catch (error) {

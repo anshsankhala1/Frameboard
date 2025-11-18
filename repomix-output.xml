@@ -1,0 +1,1575 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+client/
+  src/
+    app/
+      dashboard/
+        layout.tsx
+        page.tsx
+      globals.css
+      layout.tsx
+      page.tsx
+    components/
+      scheduling/
+        Schedule.tsx
+      shared/
+        Navigation.tsx
+        UserMenu.tsx
+      storyboard/
+        Storyboard.tsx
+  next.config.js
+  package.json
+  postcss.config.js
+  tailwind.config.js
+  tsconfig.json
+src/
+  config/
+    database.ts
+  models/
+    Project.ts
+    User.ts
+  services/
+    crew/
+      CrewService.ts
+    scheduling/
+      SchedulingService.ts
+    storyboard/
+      StoryboardService.ts
+  types/
+    schedule.ts
+    storyboard.ts
+  index.ts
+.gitignore
+package.json
+README.md
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="client/src/app/dashboard/layout.tsx">
+'use client';
+
+import { Navigation } from '@/components/shared/Navigation';
+import { UserMenu } from '@/components/shared/UserMenu';
+import { Bars3Icon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+
+// This is a placeholder user. You'll replace this with real user data.
+const user = {
+  name: 'Filmmaker Name',
+  email: 'director@example.com',
+  imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+};
+
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  // We don't have a mobile sidebar component yet, but this state is ready for it.
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="flex">
+        {/* Sidebar */}
+        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
+            <div className="flex h-16 shrink-0 items-center">
+              <img
+                className="h-8 w-auto"
+                src="/logo.svg" // Assuming you have a logo.svg in your /public folder
+                alt="Frameboard"
+              />
+            </div>
+            <Navigation />
+          </div>
+        </div>
+
+        {/* Main content */}
+        <div className="lg:pl-72 w-full">
+          <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+            {/* Mobile sidebar button */}
+            <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
+              <span className="sr-only">Open sidebar</span>
+              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            </button>
+
+            {/* Separator */}
+            <div className="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
+
+            <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+              {/* We can add a search bar here later */}
+              <div className="flex flex-1" />
+              <div className="flex items-center gap-x-4 lg:gap-x-6">
+                <UserMenu user={user} />
+              </div>
+            </div>
+          </div>
+
+          <main className="py-10">
+            <div className="px-4 sm:px-6 lg:px-8">
+              {children}
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="client/src/app/dashboard/page.tsx">
+import {
+  FilmIcon,
+  VideoCameraIcon,
+  CalendarDaysIcon,
+  UsersIcon,
+  CheckCircleIcon,
+  MapPinIcon,
+} from '@heroicons/react/24/outline';
+
+// Placeholder data - you'll fetch this from your API
+const stats = [
+  { name: 'Total Scenes', stat: '70', icon: FilmIcon, color: 'blue' },
+  { name: 'Scenes Shot', stat: '12', icon: VideoCameraIcon, color: 'green' },
+  { name: 'Shoot Days Left', stat: '18', icon: CalendarDaysIcon, color: 'yellow' },
+  { name: 'Active Crew', stat: '24', icon: UsersIcon, color: 'purple' },
+];
+
+const todoList = [
+  { id: 1, text: 'Finalize cast for Scene 12', completed: false, time: '08:00 AM' },
+  { id: 2, text: 'Secure location for "Diner"', completed: false, time: '10:30 AM' },
+  { id: 3, text: 'Send out Call Sheet for Day 3', completed: true, time: '02:00 PM' },
+  { id: 4, text: 'Review Storyboard v2', completed: false, time: '04:00 PM' },
+];
+
+const teamActivity = [
+  { id: 1, name: 'Charlie Rawat', role: 'Director', points: 13450 },
+  { id: 2, name: 'Artana Aggarwal', role: 'Producer', points: 10333 },
+  { id: 3, name: 'Tom Cook', role: 'D.P.', points: 9870 },
+];
+
+export default function DashboardPage() {
+  return (
+    <div>
+      {/* Welcome Header */}
+      <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-8">
+        Hello, Filmmaker!
+      </h1>
+
+      {/* Stats Widgets */}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((item) => (
+          <div
+            key={item.name}
+            className={`widget-card widget-card-${item.color}`}
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="widget-title">{item.name}</h3>
+              <item.icon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+            </div>
+            <p className="mt-1 text-3xl font-semibold text-gray-900">
+              {item.stat}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Main Dashboard Grid */}
+      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
+        
+        {/* Left Column: Progress & Modules */}
+        <div className="lg:col-span-2 space-y-8">
+          {/* Project Progress */}
+          <div className="widget-card">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Project Progress</h3>
+            <div className="mt-4">
+              <p className="text-sm text-gray-500 mb-2">Overall Completion</p>
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div
+                  className="bg-primary-600 h-4 rounded-full"
+                  style={{ width: '25%' }} // This would be dynamic
+                ></div>
+              </div>
+              <p className="text-right text-sm font-medium text-primary-600 mt-1">25%</p>
+            </div>
+          </div>
+
+          {/* Key Modules */}
+          <div className="widget-card">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Your Production Modules</h3>
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <a href="/storyboard" className="block p-4 bg-yellow-50 hover:bg-yellow-100 rounded-lg border border-yellow-200">
+                <VideoCameraIcon className="h-8 w-8 text-yellow-600 mb-2" />
+                <h4 className="font-semibold text-yellow-900">Storyboard</h4>
+                <p className="text-sm text-yellow-700">Visualize your film, shot by shot.</p>
+              </a>
+              <a href="/schedule" className="block p-4 bg-blue-50 hover:bg-blue-100 rounded-lg border border-blue-200">
+                <CalendarDaysIcon className="h-8 w-8 text-blue-600 mb-2" />
+                <h4 className="font-semibold text-blue-900">Schedule</h4>
+                <p className="text-sm text-blue-700">Manage shoot days and call sheets.</p>
+              </a>
+              <a href="/crew" className="block p-4 bg-green-50 hover:bg-green-100 rounded-lg border border-green-200">
+                <UsersIcon className="h-8 w-8 text-green-600 mb-2" />
+                <h4 className="font-semibold text-green-900">Crew</h4>
+                <p className="text-sm text-green-700">Coordinate your team in one place.</p>
+              </a>
+              <a href="/locations" className="block p-4 bg-purple-50 hover:bg-purple-100 rounded-lg border border-purple-200">
+                <MapPinIcon className="h-8 w-8 text-purple-600 mb-2" />
+                <h4 className="font-semibold text-purple-900">Locations</h4>
+                <p className="text-sm text-purple-700">Scout and manage locations.</p>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: To Do & Team */}
+        <div className="lg:col-span-1 space-y-8">
+          {/* To Do List */}
+          <div className="widget-card">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">To Do List</h3>
+            <ul role="list" className="mt-4 divide-y divide-gray-200">
+              {todoList.map((item) => (
+                <li key={item.id} className="flex py-3 items-center">
+                  <input
+                    id={`todo-${item.id}`}
+                    type="checkbox"
+                    defaultChecked={item.completed}
+                    className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-600"
+                  />
+                  <label htmlFor={`todo-${item.id}`} className={`ml-3 flex-1 ${item.completed ? 'text-gray-500 line-through' : 'text-gray-900'}`}>
+                    <span className="block text-sm font-medium">{item.text}</span>
+                    <span className="block text-xs text-gray-400">{item.time}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Team Leaderboard */}
+          <div className="widget-card">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Team Activity</h3>
+             <ul role="list" className="mt-4 divide-y divide-gray-200">
+              {teamActivity.map((person, index) => (
+                <li key={person.id} className="flex py-3 items-center">
+                  <span className="text-lg font-semibold text-gray-400 w-6">{index + 1}</span>
+                  <img className="h-8 w-8 rounded-full ml-3" src={`https://ui-avatars.com/api/?name=${person.name.replace(' ', '+')}&background=random`} alt="" />
+                  <div className="ml-3 flex-1">
+                    <p className="text-sm font-medium text-gray-900">{person.name}</p>
+                    <p className="text-xs text-gray-500">{person.role}</p>
+                  </div>
+                  <p className="text-sm font-semibold text-primary-600">{person.points.toLocaleString()}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="client/src/app/globals.css">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+</file>
+
+<file path="client/src/app/layout.tsx">
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'Frameboard - Film Pre-production Platform',
+  description: 'AI-powered pre-production software for indie filmmakers',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className="h-full bg-white">
+      <body className={`${inter.className} h-full`}>
+        {children}
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="client/src/app/page.tsx">
+import Header from "@/components/header"
+import Hero from "@/components/hero"
+import ProblemSection from "@/components/problem-section"
+import BenefitsSection from "@/components/benefits-section"
+
+export default function Home() {
+  return (
+    <main className="bg-white">
+      <Header />
+      <Hero />
+      <ProblemSection />
+      <BenefitsSection />
+    </main>
+  )
+}
+</file>
+
+<file path="client/src/components/scheduling/Schedule.tsx">
+import { useState } from 'react';
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
+import { format, parse, startOfWeek, getDay } from 'date-fns';
+import { enUS } from 'date-fns/locale';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+interface ShootDate {
+  id: string;
+  date: Date;
+  location: string;
+  scenes: string[];
+  crew: string[];
+}
+
+interface ScheduleProps {
+  shootDates: ShootDate[];
+  onScheduleUpdate: (dates: ShootDate[]) => void;
+}
+
+export function Schedule({ shootDates, onScheduleUpdate }: ScheduleProps) {
+  const [selectedDate, setSelectedDate] = useState<ShootDate | null>(null);
+
+  const locales = {
+    'en-US': enUS
+  };
+
+  const localizer = dateFnsLocalizer({
+    format,
+    parse,
+    startOfWeek,
+    getDay,
+    locales,
+  });
+
+  const events = shootDates.map((date) => ({
+    id: date.id,
+    title: `Shooting at ${date.location}`,
+    start: date.date,
+    end: date.date,
+    resource: date,
+  }));
+
+  const handleSelectEvent = (event: any) => {
+    setSelectedDate(event.resource);
+  };
+
+  return (
+    <div className="h-[600px]">
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        onSelectEvent={handleSelectEvent}
+        views={['month', 'week', 'day']}
+        defaultView="month"
+      />
+    </div>
+  );
+}
+</file>
+
+<file path="client/src/components/shared/Navigation.tsx">
+'use client';
+
+import React from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+
+interface NavItem {
+  name: string;
+  href: string;
+  icon: React.ComponentType<{ className: string }>;
+}
+
+const navigation: NavItem[] = [
+  {
+    name: 'Dashboard',
+    href: '/dashboard',
+    icon: HomeIcon,
+  },
+  {
+    name: 'Storyboard',
+    href: '/storyboard',
+    icon: VideoCamera,
+  },
+  {
+    name: 'Schedule',
+    href: '/schedule',
+    icon: Calendar,
+  },
+  {
+    name: 'Crew',
+    href: '/crew',
+    icon: Users,
+  },
+  {
+    name: 'Legal',
+    href: '/legal',
+    icon: DocumentText,
+  },
+];
+
+export function Navigation() {
+  const pathname = usePathname();
+
+  return (
+    <nav className="flex flex-col gap-y-1">
+      {navigation.map((item) => {
+        const isActive = pathname === item.href;
+        
+        return (
+          <Link
+            key={item.name}
+            href={item.href}
+            className={`group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 ${
+              isActive
+                ? 'bg-primary-600 text-white'
+                : 'text-gray-700 hover:bg-gray-50 hover:text-primary-600'
+            }`}
+          >
+            <item.icon
+              className={`h-6 w-6 shrink-0 ${
+                isActive ? 'text-white' : 'text-gray-400 group-hover:text-primary-600'
+              }`}
+              aria-hidden="true"
+            />
+            {item.name}
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}
+
+function HomeIcon(props: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      fill="none"
+      strokeWidth={1.5}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+      />
+    </svg>
+  );
+}
+
+function VideoCamera(props: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      fill="none"
+      strokeWidth={1.5}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"
+      />
+    </svg>
+  );
+}
+
+function Calendar(props: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      fill="none"
+      strokeWidth={1.5}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+      />
+    </svg>
+  );
+}
+
+function Users(props: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      fill="none"
+      strokeWidth={1.5}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+      />
+    </svg>
+  );
+}
+
+function DocumentText(props: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      fill="none"
+      strokeWidth={1.5}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+      />
+    </svg>
+  );
+}
+</file>
+
+<file path="client/src/components/shared/UserMenu.tsx">
+'use client';
+
+import { Fragment } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import Image from 'next/image';
+
+interface UserMenuProps {
+  user: {
+    name: string;
+    email: string;
+    imageUrl: string;
+  };
+}
+
+export function UserMenu({ user }: UserMenuProps) {
+  return (
+    <Menu as="div" className="relative">
+      <Menu.Button className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
+        <Image
+          className="h-8 w-8 rounded-full bg-gray-50"
+          src={user.imageUrl}
+          alt=""
+          width={32}
+          height={32}
+        />
+        <span className="sr-only">Your profile</span>
+        <span aria-hidden="true">{user.name}</span>
+      </Menu.Button>
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+          <Menu.Item>
+            {({ active }) => (
+              <a
+                href="/profile"
+                className={`${
+                  active ? 'bg-gray-50' : ''
+                } block px-3 py-1 text-sm leading-6 text-gray-900`}
+              >
+                Your profile
+              </a>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
+              <a
+                href="/settings"
+                className={`${
+                  active ? 'bg-gray-50' : ''
+                } block px-3 py-1 text-sm leading-6 text-gray-900`}
+              >
+                Settings
+              </a>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
+              <button
+                onClick={() => {/* Handle sign out */}}
+                className={`${
+                  active ? 'bg-gray-50' : ''
+                } block w-full px-3 py-1 text-left text-sm leading-6 text-gray-900`}
+              >
+                Sign out
+              </button>
+            )}
+          </Menu.Item>
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  );
+}
+</file>
+
+<file path="client/src/components/storyboard/Storyboard.tsx">
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import Image from 'next/image';
+
+interface StoryboardScene {
+  id: string;
+  scene: string;
+  visualDescription: string;
+  imageUrl?: string;
+}
+
+interface StoryboardProps {
+  scenes: StoryboardScene[];
+  onSceneReorder: (result: any) => void;
+}
+
+export function Storyboard({ scenes, onSceneReorder }: StoryboardProps) {
+  const handleDragEnd = (result: any) => {
+    if (!result.destination) return;
+    onSceneReorder(result);
+  };
+
+  return (
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <Droppable droppableId="scenes">
+        {(provided) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {scenes.map((scene, index) => (
+              <Draggable key={scene.id} draggableId={scene.id} index={index}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    className="relative overflow-hidden rounded-lg bg-white shadow"
+                  >
+                    {scene.imageUrl ? (
+                      <div className="aspect-[16/9] w-full bg-gray-100">
+                        <Image
+                          src={scene.imageUrl}
+                          alt={scene.scene}
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="aspect-[16/9] w-full bg-gray-100 flex items-center justify-center">
+                        <span className="text-gray-400">No image generated</span>
+                      </div>
+                    )}
+                    <div className="p-4">
+                      <h3 className="text-lg font-medium text-gray-900">
+                        Scene {index + 1}
+                      </h3>
+                      <p className="mt-1 text-sm text-gray-500">
+                        {scene.scene}
+                      </p>
+                      <p className="mt-2 text-sm text-gray-700">
+                        {scene.visualDescription}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+  );
+}
+</file>
+
+<file path="client/next.config.js">
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+      },
+    ],
+  },
+}
+
+module.exports = nextConfig
+</file>
+
+<file path="client/package.json">
+{
+  "name": "frameboard-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@headlessui/react": "^2.2.9",
+    "@heroicons/react": "^2.2.0",
+    "@mui/material": "^5.13.0",
+    "axios": "^1.4.0",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^10.12.0",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-big-calendar": "^1.19.4",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
+    "socket.io-client": "^4.6.1",
+    "zustand": "^4.3.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/postcss": "^4.1.17",
+    "@types/node": "^20.2.0",
+    "@types/react": "^18.3.26",
+    "@types/react-beautiful-dnd": "^13.1.4",
+    "@types/react-big-calendar": "^1.16.3",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.40.0",
+    "eslint-config-next": "^13.4.2",
+    "postcss": "^8.5.6",
+    "postcss-import": "^16.1.1",
+    "postcss-nesting": "^13.0.2",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.0.4"
+  }
+}
+</file>
+
+<file path="client/postcss.config.js">
+module.exports = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+    autoprefixer: {},
+  },
+}
+</file>
+
+<file path="client/tailwind.config.js">
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+        },
+        secondary: {
+          50: '#fdf4ff',
+          100: '#fae8ff',
+          200: '#f5d0fe',
+          300: '#f0abfc',
+          400: '#e879f9',
+          500: '#d946ef',
+          600: '#c026d3',
+          700: '#a21caf',
+          800: '#86198f',
+          900: '#701a75',
+        },
+      },
+    },
+  },
+  plugins: [require('@tailwindcss/forms')],
+}
+</file>
+
+<file path="client/tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+</file>
+
+<file path="src/config/database.ts">
+import mongoose from 'mongoose';
+
+export const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/frameboard');
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
+  }
+};
+</file>
+
+<file path="src/models/Project.ts">
+import mongoose from 'mongoose';
+
+const projectSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: String,
+  projectType: {
+    type: String,
+    enum: ['short_film', 'commercial', 'music_video', 'unscripted'],
+    required: true
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  crew: [{
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    role: String,
+    permissions: [String]
+  }],
+  script: {
+    currentVersion: String,
+    versions: [{
+      content: String,
+      timestamp: Date,
+      author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    }]
+  },
+  schedule: {
+    shootDates: [{
+      date: Date,
+      location: String,
+      scenes: [String],
+      crew: [mongoose.Schema.Types.ObjectId]
+    }]
+  },
+  storyboard: [{
+    sceneNumber: String,
+    shots: [{
+      shotNumber: String,
+      description: String,
+      generatedImage: String,
+      notes: String
+    }]
+  }],
+  budget: {
+    totalBudget: Number,
+    expenses: [{
+      category: String,
+      amount: Number,
+      description: String,
+      date: Date
+    }]
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+export const Project = mongoose.model('Project', projectSchema);
+</file>
+
+<file path="src/models/User.ts">
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+
+const userSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  role: {
+    type: String,
+    enum: ['director', 'producer', 'cinematographer', 'editor', 'writer', 'crew'],
+    required: true
+  },
+  projects: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Project'
+  }],
+  preferences: {
+    notifications: {
+      email: Boolean,
+      push: Boolean
+    },
+    timezone: String
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Hash password before saving
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Method to compare passwords
+userSchema.methods.comparePassword = async function(candidatePassword: string) {
+  return bcrypt.compare(candidatePassword, this.password);
+};
+
+export const User = mongoose.model('User', userSchema);
+</file>
+
+<file path="src/services/crew/CrewService.ts">
+import { Project } from '../../models/Project';
+import { Types } from 'mongoose';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+interface CrewMember {
+  user?: Types.ObjectId;
+  role?: string;
+  permissions: string[];
+}
+
+export class CrewService {
+  private transporter;
+
+  constructor() {
+    this.transporter = nodemailer.createTransport({
+      // Configure your email service here
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+  }
+
+  async assignCrewMember(projectId: string, userId: string, role: string) {
+    try {
+      const project = await Project.findById(projectId);
+      if (!project) {
+        throw new Error('Project not found');
+      }
+
+      // Check if crew member already exists
+      const existingMember = project.crew.find(
+        member => member.user?.toString() === userId
+      );
+
+      if (existingMember) {
+        throw new Error('Crew member already assigned to project');
+      }
+
+      // Add crew member
+      project.crew.push({
+        user: new Types.ObjectId(userId),
+        role,
+        permissions: this.getDefaultPermissionsForRole(role)
+      });
+
+      await project.save();
+      return project;
+    } catch (error) {
+      console.error('Error assigning crew member:', error);
+      throw error;
+    }
+  }
+
+  async sendCrewNotification(
+    recipients: string[],
+    subject: string,
+    message: string
+  ) {
+    try {
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: recipients.join(','),
+        subject,
+        text: message
+      };
+
+      await this.transporter.sendMail(mailOptions);
+    } catch (error) {
+      console.error('Error sending crew notification:', error);
+      throw error;
+    }
+  }
+
+  private getDefaultPermissionsForRole(role: string): string[] {
+    const permissions = {
+      director: ['edit_script', 'edit_schedule', 'manage_crew', 'view_all'],
+      producer: ['edit_budget', 'edit_schedule', 'manage_crew', 'view_all'],
+      cinematographer: ['edit_storyboard', 'view_script', 'view_schedule'],
+      editor: ['view_script', 'view_schedule', 'edit_notes'],
+      writer: ['edit_script', 'view_schedule', 'edit_notes'],
+      crew: ['view_schedule', 'view_notes']
+    };
+
+    return permissions[role] || ['view_schedule'];
+  }
+}
+</file>
+
+<file path="src/services/scheduling/SchedulingService.ts">
+import { Project } from '../../models/Project';
+import { ScheduleUpdate, ShootDate, ProjectSchedule } from '../../types/schedule';
+import { Types } from 'mongoose';
+
+export class SchedulingService {
+  async updateSchedule(projectId: string, scheduleUpdates: ScheduleUpdate) {
+    try {
+      const project = await Project.findById(projectId);
+      if (!project) {
+        throw new Error('Project not found');
+      }
+
+      if (!project.schedule) {
+        project.schedule = { shootDates: [] };
+      }
+
+      // Update schedule dates with ObjectId conversion
+      project.schedule.shootDates = scheduleUpdates.shootDates.map(date => ({
+        date: new Date(date.date),
+        location: date.location,
+        scenes: date.scenes,
+        crew: date.crew.map(id => new Types.ObjectId(id))
+      }));
+
+      await project.save();
+      return project;
+    } catch (error) {
+      console.error('Error updating schedule:', error);
+      throw error;
+    }
+  }
+
+  async optimizeSchedule(projectId: string) {
+    try {
+      const project = await Project.findById(projectId);
+      if (!project) {
+        throw new Error('Project not found');
+      }
+
+      if (!project.schedule) {
+        project.schedule = { shootDates: [] };
+      }
+
+      // Here you would implement schedule optimization logic
+      // For example:
+      // 1. Group scenes by location to minimize location changes
+      // 2. Consider crew availability
+      // 3. Account for time of day requirements
+      // 4. Factor in weather predictions
+      // 5. Optimize for budget constraints
+
+      const optimizedSchedule = this.calculateOptimalSchedule({
+        schedule: {
+          shootDates: project.schedule.shootDates.map(date => ({
+            ...date,
+            crew: date.crew.map(id => 
+              id instanceof Types.ObjectId ? id : new Types.ObjectId(String(id))
+            )
+          }))
+        }
+      });
+
+      project.schedule.shootDates = optimizedSchedule;
+      await project.save();
+      return project;
+    } catch (error) {
+      console.error('Error optimizing schedule:', error);
+      throw error;
+    }
+  }
+
+  private calculateOptimalSchedule(project: { schedule: ProjectSchedule }): ShootDate[] {
+    // Placeholder for schedule optimization algorithm
+    // This would be a complex algorithm considering multiple factors:
+    
+    const shootDates: ShootDate[] = [...project.schedule.shootDates];
+    
+    // Sort by location to minimize travel time
+    shootDates.sort((a, b) => {
+      const locA = a.location || '';
+      const locB = b.location || '';
+      if (locA < locB) return -1;
+      if (locA > locB) return 1;
+      return 0;
+    });
+
+    // Group scenes by location
+    const locationGroups = new Map<string, ShootDate[]>();
+    shootDates.forEach(date => {
+      const location = date.location || 'unspecified';
+      if (!locationGroups.has(location)) {
+        locationGroups.set(location, []);
+      }
+      const group = locationGroups.get(location);
+      if (group) {
+        group.push(date);
+      }
+    });
+
+    // Create optimized schedule
+    const optimizedDates: ShootDate[] = [];
+    locationGroups.forEach(dates => {
+      optimizedDates.push(...dates);
+    });
+
+    return optimizedDates;
+  }
+}
+</file>
+
+<file path="src/services/storyboard/StoryboardService.ts">
+import OpenAI from 'openai';
+import dotenv from 'dotenv';
+import { StoryboardScene } from '../../types/storyboard';
+
+dotenv.config();
+
+if (!process.env.OPENAI_API_KEY) {
+  throw new Error('OPENAI_API_KEY is required in environment variables');
+}
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+export class StoryboardService {
+  async generateStoryboardFromScript(script: string): Promise<StoryboardScene[]> {
+    try {
+      // First, analyze the script to break it into scenes
+      const sceneAnalysis = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [{
+          role: "system",
+          content: "You are a professional storyboard artist and film director."
+        }, {
+          role: "user",
+          content: `Analyze this script and break it into key visual scenes: ${script}`
+        }]
+      });
+
+      if (!sceneAnalysis.choices[0]?.message?.content) {
+        throw new Error('Failed to analyze script into scenes');
+      }
+
+      // For each scene, generate a visual description
+      const scenes = sceneAnalysis.choices[0].message.content
+        .split('\n')
+        .filter(scene => scene.trim());
+
+      const storyboard: StoryboardScene[] = [];
+
+      for (const scene of scenes) {
+        const imagePrompt = await openai.chat.completions.create({
+          model: "gpt-4",
+          messages: [{
+            role: "system",
+            content: "Create a detailed visual description for an AI image generator."
+          }, {
+            role: "user",
+            content: `Create a cinematic shot description for: ${scene}`
+          }]
+        });
+
+        if (!imagePrompt.choices[0]?.message?.content) {
+          console.warn(`Failed to generate visual description for scene: ${scene}`);
+          continue;
+        }
+
+        storyboard.push({
+          scene,
+          visualDescription: imagePrompt.choices[0].message.content
+        });
+      }
+
+      if (storyboard.length === 0) {
+        throw new Error('No valid scenes were generated from the script');
+      }
+
+      return storyboard;
+    } catch (error) {
+      console.error('Error generating storyboard:', error);
+      if (error instanceof Error) {
+        throw new Error(`Failed to generate storyboard: ${error.message}`);
+      } else {
+        throw new Error('An unknown error occurred while generating storyboard');
+      }
+    }
+  }
+}
+</file>
+
+<file path="src/types/schedule.ts">
+import { Types } from 'mongoose';
+
+export interface ShootDate {
+  date?: Date;
+  location?: string;
+  scenes: string[];
+  crew: Types.ObjectId[];
+}
+
+export interface ScheduleUpdate {
+  shootDates: {
+    date: string | Date;
+    location: string;
+    scenes: string[];
+    crew: string[];  // Will be converted to ObjectId
+  }[];
+}
+
+export interface ProjectSchedule {
+  shootDates: ShootDate[];
+}
+</file>
+
+<file path="src/types/storyboard.ts">
+export interface StoryboardScene {
+  scene: string;
+  visualDescription: string;
+  imageUrl?: string;
+}
+
+export interface SceneAnalysisResult {
+  scenes: string[];
+  visualDescriptions: string[];
+}
+</file>
+
+<file path="src/index.ts">
+import express from 'express';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import { connectDB } from './config/database';
+
+// Load environment variables
+dotenv.config();
+
+// Create Express app
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    methods: ['GET', 'POST']
+  }
+});
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use('/api/storyboard', require('./api/storyboard'));
+app.use('/api/scheduling', require('./api/scheduling'));
+app.use('/api/crew', require('./api/crew'));
+app.use('/api/legal', require('./api/legal'));
+
+// Socket.IO events
+io.on('connection', (socket) => {
+  console.log('Client connected');
+  
+  socket.on('script-update', (data) => {
+    // Broadcast script changes to all connected clients
+    socket.broadcast.emit('script-updated', data);
+  });
+
+  socket.on('schedule-update', (data) => {
+    // Broadcast schedule changes to all connected clients
+    socket.broadcast.emit('schedule-updated', data);
+  });
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+httpServer.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  connectDB();
+});
+</file>
+
+<file path=".gitignore">
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Testing
+coverage/
+
+# Next.js
+.next/
+out/
+
+# Production
+build/
+dist/
+
+# Misc
+.DS_Store
+*.pem
+.env
+.env.local
+.env.*
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Generated files
+generated/
+ai-output/
+uploads/
+media/
+</file>
+
+<file path="package.json">
+{
+  "name": "frameboard",
+  "version": "1.0.0",
+  "description": "AI-powered film pre-production software for indie filmmakers",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "@types/bcrypt": "^6.0.0",
+    "@types/mongoose": "^5.11.96",
+    "@types/nodemailer": "^7.0.3",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.8.7",
+    "nodemailer": "^6.10.1",
+    "openai": "^4.104.0",
+    "socket.io": "^4.7.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.19.24",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node-dev": "^2.0.0"
+  }
+}
+</file>
+
+<file path="README.md">
+# Frameboard
+</file>
+
+<file path="tsconfig.json">
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    // File Layout
+    // "rootDir": "./src",
+    // "outDir": "./dist",
+
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    "module": "nodenext",
+    "target": "esnext",
+    "types": [],
+    // For nodejs:
+    // "lib": ["esnext"],
+    // "types": ["node"],
+    // and npm install -D @types/node
+
+    // Other Outputs
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Style Options
+    // "noImplicitReturns": true,
+    // "noImplicitOverride": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "noPropertyAccessFromIndexSignature": true,
+
+    // Recommended Options
+    "strict": true,
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+  }
+}
+</file>
+
+</files>

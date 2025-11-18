@@ -1,0 +1,4084 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+src/
+  app/
+    about/
+      page.tsx
+    components/
+      about/
+        about-cta.tsx
+        about-hero.tsx
+        mission-section.tsx
+        stats-section.tsx
+        transform-section.tsx
+        why-frameboard.tsx
+      features/
+        ai-features.tsx
+        collaboration-features.tsx
+        cta-section.tsx
+        features-hero.tsx
+        key-features.tsx
+        workflow-section.tsx
+      get-started/
+        get-started-hero.tsx
+        quick-benefits.tsx
+        signup-form.tsx
+      portal/
+        callsheet/
+          callsheet-form.tsx
+          callsheet-preview.tsx
+        dashboard-hero.tsx
+        portal-header.tsx
+        projects-overview.tsx
+        quick-actions.tsx
+        recent-activity.tsx
+      pricing/
+        faq-section.tsx
+        feature-comparison.tsx
+        pricing-cta.tsx
+        pricing-hero.tsx
+        pricing-plans.tsx
+      benefits-section.tsx
+      header.tsx
+      hero.tsx
+      problem-section.tsx
+    features/
+      page.tsx
+    get-started/
+      page.tsx
+    portal/
+      callsheet/
+        page.tsx
+      page.tsx
+    pricing/
+      page.tsx
+    globals.css
+    layout.tsx
+    page.tsx
+next-env.d.ts
+next.config.js
+package.json
+postcss.config.mjs
+tailwind.config.ts
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="src/app/about/page.tsx">
+import Header from "@/app/components/header"
+import AboutHero from "@/app/components/about/about-hero"
+import WhyFrameboard from "@/app/components/about/why-frameboard"
+import TransformSection from "@/app/components/about/transform-section"
+import StatsSection from "@/app/components/about/stats-section"
+import MissionSection from "@/app/components/about/mission-section"
+import AboutCTA from "@/app/components/about/about-cta"
+
+export default function AboutPage() {
+  return (
+    <main className="bg-white">
+      <Header />
+      <AboutHero />
+      <WhyFrameboard />
+      <TransformSection />
+      <StatsSection />
+      <MissionSection />
+      <AboutCTA />
+    </main>
+  )
+}
+</file>
+
+<file path="src/app/components/about/about-cta.tsx">
+"use client"
+
+import { ArrowRight, Sparkles } from "lucide-react"
+
+export default function AboutCTA() {
+  return (
+    <section className="bg-gradient-to-b from-gray-900 to-black py-24 px-6 border-t-4 border-black">
+      <div className="max-w-4xl mx-auto text-center">
+        <div className="mb-8 inline-flex items-center gap-2 px-4 py-2 bg-yellow-300 border-2 border-white font-black text-sm tracking-wider">
+          <Sparkles className="w-4 h-4" />
+          <span>JOIN THE MOVEMENT</span>
+        </div>
+
+        <h2 className="text-6xl md:text-7xl font-black mb-8 leading-tight text-white">
+          READY TO TRANSFORM
+          <br />
+          YOUR PRE-PRODUCTION?
+        </h2>
+
+        <p className="text-2xl text-gray-300 mb-12 leading-relaxed">
+          Stop fighting your tools. Start making better films with less stress.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
+          <button className="px-12 py-5 bg-yellow-300 text-black border-3 border-white font-black text-xl hover:bg-yellow-400 transition flex items-center gap-3 shadow-lg">
+            Start Free Today
+            <ArrowRight className="w-6 h-6" strokeWidth={3} />
+          </button>
+
+          <button className="px-12 py-5 bg-white text-black border-3 border-white font-black text-xl hover:bg-gray-100 transition shadow-lg">
+            See How It Works
+          </button>
+        </div>
+
+        <div className="space-y-3 text-gray-400">
+          <p className="text-sm font-bold">✓ Free forever plan • No credit card required • Cancel anytime</p>
+          <p className="text-sm">Join 500+ filmmakers who have transformed their pre-production workflow</p>
+        </div>
+
+        <div className="mt-16 pt-12 border-t-2 border-gray-700">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="font-black text-4xl text-white mb-2">14 Days</div>
+              <div className="text-sm text-gray-400">Free Pro trial</div>
+            </div>
+            <div>
+              <div className="font-black text-4xl text-white mb-2">$0</div>
+              <div className="text-sm text-gray-400">To get started</div>
+            </div>
+            <div>
+              <div className="font-black text-4xl text-white mb-2">∞</div>
+              <div className="text-sm text-gray-400">Possibilities</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/about/about-hero.tsx">
+"use client"
+
+import { Film } from "lucide-react"
+
+export default function AboutHero() {
+  return (
+    <section className="bg-gradient-to-b from-yellow-50 to-white py-24 px-6 border-b-4 border-black overflow-hidden">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+          <div className="mb-8 inline-block animate-scale-in opacity-0">
+            <span className="px-4 py-2 bg-purple-300 border-2 border-black font-black text-sm tracking-wider">
+              ABOUT FRAMEBOARD
+            </span>
+          </div>
+
+          <h1 className="text-7xl font-anton mb-8 leading-tight tracking-tight animate-fade-in-up delay-100 opacity-0">
+            PRE-PRODUCTION
+            <br />
+            SHOULDN'T BE THIS HARD
+          </h1>
+
+          <p className="text-2xl text-gray-700 mb-12 leading-relaxed max-w-3xl mx-auto font-semibold animate-fade-in-up delay-200 opacity-0">
+            We built Frameboard because filmmakers deserve better tools.
+            Tools that save time. Tools that reduce stress. Tools that let you focus on creativity, not admin.
+          </p>
+        </div>
+
+        <div
+          className="border-4 border-black bg-white p-12 text-center hover:shadow-2xl transition-all duration-500 animate-scale-in delay-300 opacity-0"
+          style={{
+            boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+          }}
+        >
+          <Film className="w-16 h-16 mx-auto mb-6" strokeWidth={3} />
+          <h2 className="font-anton text-3xl mb-4 leading-tight tracking-tight">
+            FROM CHAOS TO CLARITY
+          </h2>
+          <p className="text-xl text-gray-700 leading-relaxed">
+            Frameboard transforms scattered spreadsheets, endless emails, and disorganized planning
+            into one unified platform where your entire team can collaborate effortlessly.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/about/mission-section.tsx">
+"use client"
+
+import { Heart, Target, Lightbulb } from "lucide-react"
+
+export default function MissionSection() {
+  return (
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider">
+              OUR MISSION
+            </span>
+          </div>
+          <h2 className="text-6xl font-black mb-6 leading-tight">
+            EMPOWERING FILMMAKERS
+            <br />
+            EVERYWHERE
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            We believe great films start with great pre-production. Our mission is to give every filmmaker
+            the tools they need to bring their vision to life—without the stress, chaos, and wasted time.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div
+            className="border-4 border-black bg-gradient-to-br from-blue-100 to-blue-50 p-8 text-center"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="w-16 h-16 bg-blue-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+              <Target className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <h3 className="font-black text-2xl mb-3">OUR GOAL</h3>
+            <p className="text-gray-700 leading-relaxed">
+              Make pre-production so effortless that filmmakers can focus 100% of their energy on creativity and storytelling.
+            </p>
+          </div>
+
+          <div
+            className="border-4 border-black bg-gradient-to-br from-purple-100 to-purple-50 p-8 text-center"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="w-16 h-16 bg-purple-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+              <Heart className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <h3 className="font-black text-2xl mb-3">OUR VALUES</h3>
+            <p className="text-gray-700 leading-relaxed">
+              Built by filmmakers, for filmmakers. We understand your challenges because we've been there.
+            </p>
+          </div>
+
+          <div
+            className="border-4 border-black bg-gradient-to-br from-green-100 to-green-50 p-8 text-center"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="w-16 h-16 bg-green-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+              <Lightbulb className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <h3 className="font-black text-2xl mb-3">OUR INNOVATION</h3>
+            <p className="text-gray-700 leading-relaxed">
+              AI and automation aren't buzzwords—they're tools that genuinely save hours and reduce stress.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="border-4 border-black bg-gradient-to-r from-yellow-200 to-orange-200 p-12"
+          style={{
+            boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+          }}
+        >
+          <div className="max-w-3xl mx-auto text-center">
+            <h3 className="font-black text-4xl mb-6">FOR INDIE FILMMAKERS & STUDIOS ALIKE</h3>
+            <p className="text-xl text-gray-800 leading-relaxed mb-6">
+              Whether you're a solo director planning your first short film or a production company
+              managing multiple features, Frameboard scales with you.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              From student films to major productions, from documentaries to narrative features—
+              if you're making a film, Frameboard is built for you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/about/stats-section.tsx">
+"use client"
+
+export default function StatsSection() {
+  const stats = [
+    {
+      number: "10+",
+      label: "Hours Saved",
+      sublabel: "Per week per production"
+    },
+    {
+      number: "95%",
+      label: "Fewer Conflicts",
+      sublabel: "With AI scheduling"
+    },
+    {
+      number: "3x",
+      label: "Faster Collaboration",
+      sublabel: "All in one place"
+    },
+    {
+      number: "70%",
+      label: "Less Stress",
+      sublabel: "Reported by users"
+    },
+    {
+      number: "100%",
+      label: "On-Time Delivery",
+      sublabel: "With automated tracking"
+    },
+    {
+      number: "500+",
+      label: "Productions Completed",
+      sublabel: "And counting"
+    }
+  ]
+
+  return (
+    <section className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 py-20 px-6 border-y-4 border-black">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-6 inline-block">
+            <span className="px-4 py-2 bg-white border-2 border-black font-black text-sm tracking-wider">
+              BY THE NUMBERS
+            </span>
+          </div>
+          <h2 className="text-6xl font-black mb-6 leading-tight text-white">
+            REAL RESULTS FROM
+            <br />
+            REAL PRODUCTIONS
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className="border-4 border-black bg-white p-8 text-center"
+              style={{
+                boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+              }}
+            >
+              <div className="text-6xl font-black mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                {stat.number}
+              </div>
+              <div className="font-black text-xl mb-2">{stat.label}</div>
+              <div className="text-sm text-gray-600">{stat.sublabel}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <div
+            className="inline-block border-4 border-black bg-white px-12 py-8 max-w-3xl"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <p className="text-2xl font-black mb-4">
+              "Frameboard cut our pre-production time in half. We went from chaos to organized in days."
+            </p>
+            <div className="text-sm text-gray-700">
+              <div className="font-bold">— Sarah Mitchell</div>
+              <div>Producer, Independent Films</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/about/transform-section.tsx">
+"use client"
+
+import { X, ArrowRight, Check } from "lucide-react"
+
+export default function TransformSection() {
+  return (
+    <section className="bg-gradient-to-b from-gray-50 to-white py-20 px-6 border-y-4 border-black">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-green-300 border-2 border-black font-black text-sm tracking-wider">
+              THE TRANSFORMATION
+            </span>
+          </div>
+          <h2 className="text-5xl font-black mb-6 leading-tight">
+            BEFORE & AFTER FRAMEBOARD
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {/* Before - Old Way */}
+          <div
+            className="border-4 border-black bg-red-50 p-8"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-red-500 border-3 border-black rounded-full flex items-center justify-center">
+                <X className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <h3 className="font-black text-3xl">THE OLD WAY</h3>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Scattered Tools</div>
+                  <div className="text-sm text-gray-700">Spreadsheets, email chains, Google Docs, separate calendar apps—information everywhere</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Manual Everything</div>
+                  <div className="text-sm text-gray-700">Hours spent building schedules by hand, checking availability one person at a time</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Constant Conflicts</div>
+                  <div className="text-sm text-gray-700">Double bookings, missed availability, crew members in two places at once</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Communication Chaos</div>
+                  <div className="text-sm text-gray-700">Endless email threads, missing messages, people out of the loop</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Version Confusion</div>
+                  <div className="text-sm text-gray-700">"Which call sheet is the latest?" "Did you see the updated schedule?"</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <X className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Stressed Teams</div>
+                  <div className="text-sm text-gray-700">Overwhelmed crew, frustrated producers, exhausted directors—before shooting even begins</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 p-4 bg-white border-2 border-black text-center">
+              <div className="font-black text-sm text-red-600">RESULT: Wasted Time, Missed Opportunities, Preventable Mistakes</div>
+            </div>
+          </div>
+
+          {/* After - With Frameboard */}
+          <div
+            className="border-4 border-black bg-green-50 p-8"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-green-500 border-3 border-black rounded-full flex items-center justify-center">
+                <Check className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <h3 className="font-black text-3xl">WITH FRAMEBOARD</h3>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">One Unified Platform</div>
+                  <div className="text-sm text-gray-700">Everything in one place—schedules, storyboards, crew info, locations, call sheets</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">AI-Powered Automation</div>
+                  <div className="text-sm text-gray-700">Intelligent scheduling, automated conflict detection, smart recommendations—done in minutes</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Zero Conflicts</div>
+                  <div className="text-sm text-gray-700">AI analyzes all availability and constraints, preventing scheduling issues before they happen</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Seamless Communication</div>
+                  <div className="text-sm text-gray-700">Built-in messaging, automatic notifications, everyone sees updates instantly</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Always Current</div>
+                  <div className="text-sm text-gray-700">Single source of truth, real-time updates, everyone working from the same information</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" strokeWidth={3} />
+                <div>
+                  <div className="font-bold mb-1">Focused, Creative Teams</div>
+                  <div className="text-sm text-gray-700">Less admin stress means more mental space for the creative work that matters</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 p-4 bg-white border-2 border-black text-center">
+              <div className="font-black text-sm text-green-600">RESULT: More Time, Better Films, Happier Teams</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <div
+            className="inline-block border-4 border-black bg-gradient-to-r from-yellow-300 to-orange-300 px-12 py-8"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="flex items-center gap-4">
+              <div className="text-left">
+                <div className="font-black text-3xl mb-2">THE DIFFERENCE IS CLEAR</div>
+                <div className="text-lg text-gray-800">Stop fighting your tools. Start making better films.</div>
+              </div>
+              <ArrowRight className="w-12 h-12 flex-shrink-0" strokeWidth={3} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/about/why-frameboard.tsx">
+"use client"
+
+import { Clock, Zap, Users, CheckCircle, Sparkles, TrendingUp } from "lucide-react"
+
+export default function WhyFrameboard() {
+  const reasons = [
+    {
+      icon: Clock,
+      title: "SAVE HOURS EVERY WEEK",
+      description: "Stop wasting time switching between tools, chasing down information, and manually coordinating schedules. Frameboard automates tedious tasks so you can focus on what matters.",
+      color: "bg-blue-400",
+      stat: "10+ hours saved per week"
+    },
+    {
+      icon: Sparkles,
+      title: "AI-POWERED OPTIMIZATION",
+      description: "Our intelligent AI analyzes your production needs, crew availability, and constraints to generate optimal schedules, find perfect locations, and match actors to characters—automatically.",
+      color: "bg-purple-400",
+      stat: "90% faster scheduling"
+    },
+    {
+      icon: Users,
+      title: "ELIMINATE SCHEDULING CONFLICTS",
+      description: "Never double-book crew or miss availability windows again. Frameboard's smart conflict detection ensures everyone is where they need to be, when they need to be there.",
+      color: "bg-green-400",
+      stat: "95% fewer conflicts"
+    },
+    {
+      icon: TrendingUp,
+      title: "INCREASE TEAM PRODUCTIVITY",
+      description: "When everything lives in one place, your team works faster. No more searching for files, asking for updates, or missing important changes. Everyone stays in sync, effortlessly.",
+      color: "bg-orange-400",
+      stat: "3x faster collaboration"
+    },
+    {
+      icon: CheckCircle,
+      title: "NEVER MISS A DEADLINE",
+      description: "Automated reminders, clear timelines, and real-time updates keep your production on track. Know exactly what's done, what's pending, and what needs attention.",
+      color: "bg-red-400",
+      stat: "100% on-time productions"
+    },
+    {
+      icon: Zap,
+      title: "BETTER FILMS, LESS STRESS",
+      description: "With AI handling logistics and automation taking care of admin work, you and your team have more energy for creativity. Make better decisions when you're not overwhelmed.",
+      color: "bg-pink-400",
+      stat: "70% less stress reported"
+    }
+  ]
+
+  return (
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider">
+              WHY FRAMEBOARD?
+            </span>
+          </div>
+          <h2 className="text-6xl font-black mb-6 leading-tight">
+            BUILT FOR FILMMAKERS
+            <br />
+            BY FILMMAKERS
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            We understand your pain points because we've lived them. Here's how Frameboard solves the biggest challenges in pre-production.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {reasons.map((reason, index) => (
+            <div
+              key={index}
+              className="border-4 border-black bg-white p-8 hover:translate-y-[-4px] transition-transform"
+              style={{
+                boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+              }}
+            >
+              <div className="mb-6">
+                <div className={`w-16 h-16 ${reason.color} border-3 border-black rounded-full flex items-center justify-center mb-4`}>
+                  <reason.icon className="w-8 h-8 text-white" strokeWidth={3} />
+                </div>
+                <h3 className="font-black text-2xl mb-3 leading-tight">
+                  {reason.title}
+                </h3>
+              </div>
+
+              <p className="text-gray-700 leading-relaxed mb-6">
+                {reason.description}
+              </p>
+
+              <div className="pt-4 border-t-2 border-gray-200">
+                <div className="inline-block px-3 py-1 bg-yellow-100 border-2 border-black">
+                  <span className="font-black text-sm">{reason.stat}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/features/ai-features.tsx">
+"use client"
+
+import { Sparkles, Calendar, Image, MapPin, Lightbulb } from "lucide-react"
+
+export default function AIFeatures() {
+  return (
+    <section className="bg-gradient-to-b from-yellow-50 to-white py-20 px-6 border-y-4 border-black">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-purple-300 border-2 border-black font-black text-sm tracking-wider">
+              AI-POWERED
+            </span>
+          </div>
+          <h2 className="text-5xl font-black mb-6 leading-tight">
+            INTELLIGENT AUTOMATION
+            <br />
+            FOR SMARTER PRE-PRODUCTION
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Our AI integrations take the stress out of pre-production by automating tedious tasks and providing intelligent recommendations.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          {/* AI Scheduling */}
+          <div
+            className="border-4 border-black bg-blue-100 p-10"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="flex items-start gap-4 mb-6">
+              <div className="w-14 h-14 bg-blue-500 border-3 border-black rounded-full flex items-center justify-center flex-shrink-0">
+                <Calendar className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <div>
+                <h3 className="font-black text-3xl mb-2 leading-tight">
+                  AI SCHEDULING ASSISTANT
+                </h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-5 h-5 text-purple-600" />
+                  <span className="text-sm font-bold text-purple-600">POWERED BY AI</span>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-gray-800 leading-relaxed mb-6 text-lg">
+              Input your production timeline, crew availability, and constraints. Our AI analyzes all factors and generates optimal schedules that minimize conflicts and maximize efficiency.
+            </p>
+
+            <div className="bg-white border-3 border-black p-6 rounded-lg">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold">Conflict Detection</span>
+                  <span className="px-3 py-1 bg-green-300 border-2 border-black text-xs font-bold">ACTIVE</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="font-bold">Auto-Optimization</span>
+                  <span className="px-3 py-1 bg-green-300 border-2 border-black text-xs font-bold">ACTIVE</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="font-bold">Smart Suggestions</span>
+                  <span className="px-3 py-1 bg-green-300 border-2 border-black text-xs font-bold">ACTIVE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* AI Storyboarding */}
+          <div
+            className="border-4 border-black bg-purple-100 p-10"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="flex items-start gap-4 mb-6">
+              <div className="w-14 h-14 bg-purple-500 border-3 border-black rounded-full flex items-center justify-center flex-shrink-0">
+                <Image className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <div>
+                <h3 className="font-black text-3xl mb-2 leading-tight">
+                  AI STORYBOARD GENERATOR
+                </h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-5 h-5 text-purple-600" />
+                  <span className="text-sm font-bold text-purple-600">POWERED BY AI</span>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-gray-800 leading-relaxed mb-6 text-lg">
+              Describe your scenes and let AI generate visual representations. Transform your script into storyboard images and even preview videos of your shots.
+            </p>
+
+            <div className="bg-white border-3 border-black p-6 rounded-lg">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold">Scene Visualization</span>
+                  <span className="px-3 py-1 bg-yellow-300 border-2 border-black text-xs font-bold">AI</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="font-bold">Shot Preview Videos</span>
+                  <span className="px-3 py-1 bg-yellow-300 border-2 border-black text-xs font-bold">AI</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="font-bold">Style Matching</span>
+                  <span className="px-3 py-1 bg-yellow-300 border-2 border-black text-xs font-bold">AI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* AI Location Finding */}
+          <div
+            className="border-4 border-black bg-orange-100 p-10"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="flex items-start gap-4 mb-6">
+              <div className="w-14 h-14 bg-orange-500 border-3 border-black rounded-full flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <div>
+                <h3 className="font-black text-3xl mb-2 leading-tight">
+                  SMART LOCATION MATCHING
+                </h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-5 h-5 text-purple-600" />
+                  <span className="text-sm font-bold text-purple-600">POWERED BY AI</span>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-gray-800 leading-relaxed mb-6 text-lg">
+              AI analyzes your script and storyboards to recommend perfect filming locations based on your creative vision, budget, and logistical needs.
+            </p>
+
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-black rounded-full"></div>
+                <span className="text-sm font-bold">Script-based recommendations</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-black rounded-full"></div>
+                <span className="text-sm font-bold">Proximity optimization</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-black rounded-full"></div>
+                <span className="text-sm font-bold">Budget-aware suggestions</span>
+              </div>
+            </div>
+          </div>
+
+          {/* AI Actor Matching */}
+          <div
+            className="border-4 border-black bg-pink-100 p-10"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="flex items-start gap-4 mb-6">
+              <div className="w-14 h-14 bg-pink-500 border-3 border-black rounded-full flex items-center justify-center flex-shrink-0">
+                <Lightbulb className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <div>
+                <h3 className="font-black text-3xl mb-2 leading-tight">
+                  INTELLIGENT CASTING
+                </h3>
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-5 h-5 text-purple-600" />
+                  <span className="text-sm font-bold text-purple-600">POWERED BY AI</span>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-gray-800 leading-relaxed mb-6 text-lg">
+              Describe your characters and let AI find actors that match your vision. Get recommendations based on character traits, experience, and availability.
+            </p>
+
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-black rounded-full"></div>
+                <span className="text-sm font-bold">Character trait matching</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-black rounded-full"></div>
+                <span className="text-sm font-bold">Experience level filtering</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-black rounded-full"></div>
+                <span className="text-sm font-bold">Availability checking</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/features/collaboration-features.tsx">
+"use client"
+
+import { Users, MessageSquare, Bell, Shield, Check } from "lucide-react"
+
+export default function CollaborationFeatures() {
+  return (
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-green-300 border-2 border-black font-black text-sm tracking-wider">
+              COLLABORATION
+            </span>
+          </div>
+          <h2 className="text-5xl font-black mb-6 leading-tight">
+            EVERYONE ON THE
+            <br />
+            SAME PAGE
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Bring your entire production team together. Assign roles, manage permissions, and keep everyone synchronized throughout pre-production.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Team Management */}
+          <div
+            className="border-4 border-black bg-white p-10"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="mb-6">
+              <div className="w-14 h-14 bg-green-400 border-3 border-black rounded-full flex items-center justify-center mb-4">
+                <Users className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <h3 className="font-black text-3xl mb-4 leading-tight">
+                TEAM MANAGEMENT
+              </h3>
+            </div>
+
+            <p className="text-gray-600 leading-relaxed mb-6 text-lg">
+              Add unlimited team members to your production. Assign roles like Director, Producer, Cinematographer, and more. Everyone has access to the information they need.
+            </p>
+
+            <div className="bg-gray-50 border-3 border-gray-300 p-6 rounded-lg mb-6">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-400 border-2 border-black rounded-full flex items-center justify-center text-white font-bold">
+                    JD
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-bold">John Director</div>
+                    <div className="text-sm text-gray-600">Director</div>
+                  </div>
+                  <span className="px-3 py-1 bg-yellow-300 border-2 border-black text-xs font-bold">ADMIN</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-purple-400 border-2 border-black rounded-full flex items-center justify-center text-white font-bold">
+                    SP
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-bold">Sarah Producer</div>
+                    <div className="text-sm text-gray-600">Producer</div>
+                  </div>
+                  <span className="px-3 py-1 bg-green-300 border-2 border-black text-xs font-bold">EDITOR</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-orange-400 border-2 border-black rounded-full flex items-center justify-center text-white font-bold">
+                    MC
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-bold">Mike Cinematographer</div>
+                    <div className="text-sm text-gray-600">DP</div>
+                  </div>
+                  <span className="px-3 py-1 bg-blue-300 border-2 border-black text-xs font-bold">VIEWER</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="font-semibold">Unlimited team members</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="font-semibold">Custom role assignments</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="font-semibold">Availability tracking</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Permissions & Access */}
+          <div
+            className="border-4 border-black bg-white p-10"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="mb-6">
+              <div className="w-14 h-14 bg-red-400 border-3 border-black rounded-full flex items-center justify-center mb-4">
+                <Shield className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <h3 className="font-black text-3xl mb-4 leading-tight">
+                ROLE-BASED PERMISSIONS
+              </h3>
+            </div>
+
+            <p className="text-gray-600 leading-relaxed mb-6 text-lg">
+              Control who can view, edit, or manage different aspects of your production. Keep sensitive information secure while ensuring collaboration.
+            </p>
+
+            <div className="space-y-4 mb-6">
+              <div className="bg-yellow-50 border-3 border-yellow-300 p-4 rounded-lg">
+                <div className="font-black mb-2 flex items-center gap-2">
+                  <span className="px-2 py-1 bg-yellow-300 border-2 border-black text-xs">ADMIN</span>
+                  Full Access
+                </div>
+                <p className="text-sm text-gray-600">Can manage everything including team, budget, and settings</p>
+              </div>
+
+              <div className="bg-green-50 border-3 border-green-300 p-4 rounded-lg">
+                <div className="font-black mb-2 flex items-center gap-2">
+                  <span className="px-2 py-1 bg-green-300 border-2 border-black text-xs">EDITOR</span>
+                  Edit Access
+                </div>
+                <p className="text-sm text-gray-600">Can edit schedules, storyboards, and production documents</p>
+              </div>
+
+              <div className="bg-blue-50 border-3 border-blue-300 p-4 rounded-lg">
+                <div className="font-black mb-2 flex items-center gap-2">
+                  <span className="px-2 py-1 bg-blue-300 border-2 border-black text-xs">VIEWER</span>
+                  View Only
+                </div>
+                <p className="text-sm text-gray-600">Can view schedules and receive updates</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Real-time Updates */}
+          <div
+            className="border-4 border-black bg-white p-10"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="mb-6">
+              <div className="w-14 h-14 bg-blue-400 border-3 border-black rounded-full flex items-center justify-center mb-4">
+                <Bell className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <h3 className="font-black text-3xl mb-4 leading-tight">
+                REAL-TIME NOTIFICATIONS
+              </h3>
+            </div>
+
+            <p className="text-gray-600 leading-relaxed mb-6 text-lg">
+              Keep your team informed with instant notifications. Get alerts for schedule changes, new assignments, updates, and important deadlines.
+            </p>
+
+            <div className="bg-gray-50 border-3 border-gray-300 p-6 rounded-lg space-y-3">
+              <div className="flex items-start gap-3 p-3 bg-white border-2 border-gray-300 rounded">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                <div className="flex-1">
+                  <div className="font-bold text-sm">Schedule Updated</div>
+                  <div className="text-xs text-gray-600">Call time changed to 7:00 AM</div>
+                </div>
+                <span className="text-xs text-gray-500">2m ago</span>
+              </div>
+              <div className="flex items-start gap-3 p-3 bg-white border-2 border-gray-300 rounded">
+                <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                <div className="flex-1">
+                  <div className="font-bold text-sm">New Location Added</div>
+                  <div className="text-xs text-gray-600">Central Park confirmed</div>
+                </div>
+                <span className="text-xs text-gray-500">1h ago</span>
+              </div>
+              <div className="flex items-start gap-3 p-3 bg-white border-2 border-gray-300 rounded">
+                <div className="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+                <div className="flex-1">
+                  <div className="font-bold text-sm">Task Assigned</div>
+                  <div className="text-xs text-gray-600">Review storyboard for Scene 5</div>
+                </div>
+                <span className="text-xs text-gray-500">3h ago</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Team Communication */}
+          <div
+            className="border-4 border-black bg-white p-10"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="mb-6">
+              <div className="w-14 h-14 bg-purple-400 border-3 border-black rounded-full flex items-center justify-center mb-4">
+                <MessageSquare className="w-7 h-7 text-white" strokeWidth={3} />
+              </div>
+              <h3 className="font-black text-3xl mb-4 leading-tight">
+                BUILT-IN MESSAGING
+              </h3>
+            </div>
+
+            <p className="text-gray-600 leading-relaxed mb-6 text-lg">
+              Discuss scenes, share feedback, and coordinate with your team—all within Frameboard. No need to switch between apps.
+            </p>
+
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="font-semibold">Production-wide announcements</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="font-semibold">Scene-specific discussions</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="font-semibold">Direct messaging</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="font-semibold">File sharing & attachments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/features/cta-section.tsx">
+"use client"
+
+import { ArrowRight, Sparkles } from "lucide-react"
+
+export default function CTASection() {
+  return (
+    <section className="bg-gradient-to-br from-yellow-300 via-orange-300 to-red-300 py-24 px-6 border-t-4 border-black">
+      <div className="max-w-4xl mx-auto text-center">
+        <div className="mb-8 inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-black font-black text-sm tracking-wider">
+          <Sparkles className="w-4 h-4" />
+          <span>START FREE TODAY</span>
+        </div>
+
+        <h2 className="text-6xl md:text-7xl font-black mb-6 leading-tight">
+          READY TO TRANSFORM
+          <br />
+          YOUR PRE-PRODUCTION?
+        </h2>
+
+        <p className="text-xl text-gray-800 mb-12 leading-relaxed max-w-2xl mx-auto">
+          Join filmmakers who are saving hours of work and reducing stress with Frameboard's intelligent pre-production tools.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <button className="px-10 py-4 bg-black text-white border-3 border-black font-black text-lg hover:bg-gray-800 transition flex items-center gap-3 shadow-lg">
+            Get Started Free
+            <ArrowRight className="w-6 h-6" strokeWidth={3} />
+          </button>
+
+          <button className="px-10 py-4 bg-white border-3 border-black font-black text-lg hover:bg-gray-100 transition shadow-lg">
+            Schedule a Demo
+          </button>
+        </div>
+
+        <div className="mt-12 flex items-center justify-center gap-8 flex-wrap">
+          <div className="text-center">
+            <div className="font-black text-3xl mb-1">500+</div>
+            <div className="text-sm font-bold text-gray-700">Productions</div>
+          </div>
+          <div className="w-px h-12 bg-black"></div>
+          <div className="text-center">
+            <div className="font-black text-3xl mb-1">10k+</div>
+            <div className="text-sm font-bold text-gray-700">Hours Saved</div>
+          </div>
+          <div className="w-px h-12 bg-black"></div>
+          <div className="text-center">
+            <div className="font-black text-3xl mb-1">98%</div>
+            <div className="text-sm font-bold text-gray-700">Satisfaction</div>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-8 border-t-2 border-black">
+          <p className="text-sm font-bold text-gray-700">
+            No credit card required • Free 14-day trial • Cancel anytime
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/features/features-hero.tsx">
+"use client"
+
+import { Calendar, Users, Film, MapPin, FileText } from "lucide-react"
+
+export default function FeaturesHero() {
+  return (
+    <section className="bg-gradient-to-b from-blue-50 to-white py-24 px-6 border-b-4 border-black overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block animate-scale-in opacity-0">
+            <span className="px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider">
+              POWERFUL FEATURES
+            </span>
+          </div>
+          <h1 className="text-7xl font-anton mb-6 leading-tight tracking-tight animate-fade-in-up delay-100 opacity-0">
+            EVERYTHING YOU NEED
+            <br />
+            FOR PRE-PRODUCTION
+          </h1>
+          <p className="text-xl text-gray-600 mb-12 leading-relaxed max-w-3xl mx-auto animate-fade-in-up delay-200 opacity-0">
+            From automated scheduling to AI-powered storyboarding, Frameboard brings together all the tools you need to streamline your film pre-production process.
+          </p>
+        </div>
+
+        {/* Feature Icons Grid */}
+        <div className="grid grid-cols-5 gap-6 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center gap-3 animate-fade-in-up delay-300 opacity-0">
+            <div className="w-16 h-16 bg-blue-400 border-3 border-black rounded-lg flex items-center justify-center hover:scale-110 transition-all duration-300">
+              <Calendar className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <span className="font-bold text-sm text-center">Smart Scheduling</span>
+          </div>
+          <div className="flex flex-col items-center gap-3 animate-fade-in-up delay-300 opacity-0">
+            <div className="w-16 h-16 bg-purple-400 border-3 border-black rounded-lg flex items-center justify-center hover:scale-110 transition-all duration-300">
+              <Film className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <span className="font-bold text-sm text-center">Storyboarding</span>
+          </div>
+          <div className="flex flex-col items-center gap-3 animate-fade-in-up delay-400 opacity-0">
+            <div className="w-16 h-16 bg-green-400 border-3 border-black rounded-lg flex items-center justify-center hover:scale-110 transition-all duration-300">
+              <Users className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <span className="font-bold text-sm text-center">Crew Coordination</span>
+          </div>
+          <div className="flex flex-col items-center gap-3 animate-fade-in-up delay-400 opacity-0">
+            <div className="w-16 h-16 bg-red-400 border-3 border-black rounded-lg flex items-center justify-center hover:scale-110 transition-all duration-300">
+              <FileText className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <span className="font-bold text-sm text-center">Call Sheets</span>
+          </div>
+          <div className="flex flex-col items-center gap-3 animate-fade-in-up delay-500 opacity-0">
+            <div className="w-16 h-16 bg-orange-400 border-3 border-black rounded-lg flex items-center justify-center hover:scale-110 transition-all duration-300">
+              <MapPin className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <span className="font-bold text-sm text-center">Location Finder</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/features/key-features.tsx">
+"use client"
+
+import { Calendar, Film, Users, FileText, MapPin, User } from "lucide-react"
+
+export default function KeyFeatures() {
+  const features = [
+    {
+      icon: Calendar,
+      title: "CENTRALIZED SCHEDULING",
+      description: "Automatically coordinate your entire production timeline. Input your crew's availability, production duration, and let our smart system create conflict-free schedules.",
+      color: "bg-blue-400",
+      highlights: [
+        "Team availability tracking",
+        "Conflict detection",
+        "Auto-generated timelines",
+        "Calendar integrations"
+      ]
+    },
+    {
+      icon: Film,
+      title: "STORYBOARD & SHOT LIST",
+      description: "Create detailed storyboards and shot lists with visual references. Organize scenes, add notes, and share with your team—all in one place.",
+      color: "bg-purple-400",
+      highlights: [
+        "Visual scene builder",
+        "Shot list management",
+        "Reference image library",
+        "Export to PDF"
+      ]
+    },
+    {
+      icon: Users,
+      title: "CREW COORDINATION",
+      description: "Keep your entire crew synchronized. Add team members with different roles, manage permissions, and ensure everyone has access to what they need.",
+      color: "bg-green-400",
+      highlights: [
+        "Role-based access",
+        "Real-time updates",
+        "Team messaging",
+        "Task assignments"
+      ]
+    },
+    {
+      icon: FileText,
+      title: "AUTOMATED CALL SHEETS",
+      description: "Generate professional call sheets instantly. Include all necessary details—scenes, locations, crew, call times—and distribute with one click.",
+      color: "bg-red-400",
+      highlights: [
+        "One-click generation",
+        "Customizable templates",
+        "Email distribution",
+        "Mobile-friendly"
+      ]
+    },
+    {
+      icon: MapPin,
+      title: "LOCATION FINDER",
+      description: "Discover and manage filming locations effortlessly. Search nearby locations that match your script requirements and keep all location details organized.",
+      color: "bg-orange-400",
+      highlights: [
+        "Smart location search",
+        "Location details & photos",
+        "Permission tracking",
+        "Map integration"
+      ]
+    },
+    {
+      icon: User,
+      title: "ACTOR FINDING",
+      description: "Find the perfect cast for your production. Search actors based on your character descriptions and manage auditions and callbacks.",
+      color: "bg-pink-400",
+      highlights: [
+        "Character matching",
+        "Audition scheduling",
+        "Portfolio management",
+        "Availability tracking"
+      ]
+    }
+  ]
+
+  return (
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider">
+              CORE FEATURES
+            </span>
+          </div>
+          <h2 className="text-5xl font-black mb-6 leading-tight">
+            ALL YOUR PRE-PRODUCTION
+            <br />
+            TOOLS IN ONE PLACE
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="border-4 border-black bg-white p-8 hover:translate-y-[-4px] transition-transform"
+              style={{
+                boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+              }}
+            >
+              <div className="mb-6">
+                <div className={`w-16 h-16 ${feature.color} border-3 border-black rounded-lg flex items-center justify-center`}>
+                  <feature.icon className="w-8 h-8 text-white" strokeWidth={3} />
+                </div>
+              </div>
+
+              <h3 className="font-black text-2xl mb-4 leading-tight">
+                {feature.title}
+              </h3>
+
+              <p className="text-gray-600 leading-relaxed mb-6">
+                {feature.description}
+              </p>
+
+              <div className="space-y-2">
+                {feature.highlights.map((highlight, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-black rounded-full"></div>
+                    <span className="text-sm font-semibold">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/features/workflow-section.tsx">
+"use client"
+
+import { ArrowRight, CheckCircle } from "lucide-react"
+
+export default function WorkflowSection() {
+  const steps = [
+    {
+      number: "01",
+      title: "Create Your Production",
+      description: "Set up your project with basic details—title, duration, and key dates.",
+      color: "bg-blue-300"
+    },
+    {
+      number: "02",
+      title: "Add Your Team",
+      description: "Invite crew members, assign roles, and input everyone's availability.",
+      color: "bg-purple-300"
+    },
+    {
+      number: "03",
+      title: "Let AI Build Your Schedule",
+      description: "Our AI analyzes availability and creates an optimized production schedule.",
+      color: "bg-green-300"
+    },
+    {
+      number: "04",
+      title: "Create Storyboards & Shot Lists",
+      description: "Build visual references and organize every shot you need to capture.",
+      color: "bg-orange-300"
+    },
+    {
+      number: "05",
+      title: "Find Locations & Cast",
+      description: "Discover perfect locations and actors that match your vision.",
+      color: "bg-pink-300"
+    },
+    {
+      number: "06",
+      title: "Generate Call Sheets",
+      description: "Create and distribute professional call sheets with one click.",
+      color: "bg-yellow-300"
+    }
+  ]
+
+  return (
+    <section className="bg-gradient-to-b from-gray-50 to-white py-20 px-6 border-y-4 border-black">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider">
+              HOW IT WORKS
+            </span>
+          </div>
+          <h2 className="text-5xl font-black mb-6 leading-tight">
+            FROM IDEA TO PRODUCTION
+            <br />
+            IN 6 SIMPLE STEPS
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Streamline your entire pre-production workflow with Frameboard's intuitive process.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {steps.map((step, index) => (
+            <div key={index} className="relative">
+              <div
+                className="border-4 border-black bg-white p-8 h-full"
+                style={{
+                  boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+                }}
+              >
+                <div className={`w-16 h-16 ${step.color} border-3 border-black rounded-lg flex items-center justify-center mb-4`}>
+                  <span className="text-2xl font-black">{step.number}</span>
+                </div>
+
+                <h3 className="font-black text-2xl mb-4 leading-tight">
+                  {step.title}
+                </h3>
+
+                <p className="text-gray-600 leading-relaxed">
+                  {step.description}
+                </p>
+
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:block absolute -right-4 top-1/2 transform -translate-y-1/2 z-10">
+                    <ArrowRight className="w-8 h-8 text-gray-400" strokeWidth={3} />
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <div
+            className="inline-block border-4 border-black bg-green-100 p-8"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <CheckCircle className="w-12 h-12 text-green-600" strokeWidth={3} />
+              <h3 className="font-black text-3xl">READY TO SHOOT</h3>
+            </div>
+            <p className="text-lg text-gray-700">
+              With everything organized and automated, you're ready to focus on what matters—making great films.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/get-started/get-started-hero.tsx">
+"use client"
+
+import { Sparkles } from "lucide-react"
+
+export default function GetStartedHero() {
+  return (
+    <section className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 py-20 px-6 border-b-4 border-black overflow-hidden">
+      <div className="max-w-3xl mx-auto text-center">
+        <div className="mb-8 inline-flex items-center gap-2 px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider animate-scale-in opacity-0">
+          <Sparkles className="w-4 h-4" />
+          <span>START YOUR JOURNEY</span>
+        </div>
+
+        <h1 className="text-6xl md:text-7xl font-anton mb-6 leading-tight text-white tracking-tight animate-fade-in-up delay-100 opacity-0">
+          GET STARTED IN
+          <br />
+          60 SECONDS
+        </h1>
+
+        <p className="text-2xl text-white mb-8 leading-relaxed animate-fade-in-up delay-200 opacity-0">
+          Join hundreds of filmmakers using Frameboard to streamline their pre-production.
+          <br />
+          <span className="font-bold">No credit card required. Free forever plan available.</span>
+        </p>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/get-started/quick-benefits.tsx">
+"use client"
+
+import { Zap, Shield, Sparkles } from "lucide-react"
+
+export default function QuickBenefits() {
+  return (
+    <section className="bg-gray-50 py-16 px-6 border-t-4 border-black">
+      <div className="max-w-5xl mx-auto">
+        <h3 className="text-3xl font-black text-center mb-12">WHAT HAPPENS NEXT?</h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            className="border-4 border-black bg-white p-6 text-center"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="w-16 h-16 bg-blue-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+              <Zap className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <div className="font-black text-xl mb-3">1. INSTANT ACCESS</div>
+            <p className="text-sm text-gray-700">
+              Get immediate access to your dashboard and start creating your first production in seconds.
+            </p>
+          </div>
+
+          <div
+            className="border-4 border-black bg-white p-6 text-center"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="w-16 h-16 bg-purple-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+              <Sparkles className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <div className="font-black text-xl mb-3">2. TRY PRO FREE</div>
+            <p className="text-sm text-gray-700">
+              Enjoy a 14-day free trial of all Pro features—AI scheduling, unlimited projects, and more.
+            </p>
+          </div>
+
+          <div
+            className="border-4 border-black bg-white p-6 text-center"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="w-16 h-16 bg-green-500 border-3 border-black rounded-full flex items-center justify-center mx-auto mb-4">
+              <Shield className="w-8 h-8 text-white" strokeWidth={3} />
+            </div>
+            <div className="font-black text-xl mb-3">3. STAY FREE</div>
+            <p className="text-sm text-gray-700">
+              After your trial, keep using Frameboard free forever or upgrade to Pro anytime.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 text-center">
+          <div
+            className="inline-block border-4 border-black bg-gradient-to-r from-yellow-300 to-orange-300 px-8 py-6"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <p className="font-black text-2xl mb-2">QUESTIONS?</p>
+            <p className="text-gray-800">
+              Check out our{" "}
+              <a href="/pricing" className="underline font-bold hover:text-black">
+                pricing page
+              </a>{" "}
+              or{" "}
+              <a href="/about" className="underline font-bold hover:text-black">
+                learn more about us
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/get-started/signup-form.tsx">
+"use client"
+
+import { ArrowRight, Mail, User, Check } from "lucide-react"
+import { useState } from "react"
+
+export default function SignupForm() {
+  const [selectedPlan, setSelectedPlan] = useState<"free" | "pro">("free")
+
+  return (
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-2xl mx-auto">
+        <div
+          className="border-4 border-black bg-gradient-to-br from-gray-50 to-white p-12 hover:shadow-xl transition-all duration-300"
+          style={{
+            boxShadow: "10px 10px 0px rgba(0,0,0,1)",
+          }}
+        >
+          <h2 className="text-4xl font-anton mb-8 text-center tracking-tight">CREATE YOUR ACCOUNT</h2>
+
+          <form className="space-y-6">
+            {/* Name Input */}
+            <div>
+              <label htmlFor="name" className="block font-bold text-lg mb-3">
+                Full Name
+              </label>
+              <div className="relative">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                  <User className="w-5 h-5 text-gray-500" strokeWidth={2} />
+                </div>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Enter your full name"
+                  className="w-full pl-12 pr-4 py-4 border-3 border-black text-lg focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Email Input */}
+            <div>
+              <label htmlFor="email" className="block font-bold text-lg mb-3">
+                Email Address
+              </label>
+              <div className="relative">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                  <Mail className="w-5 h-5 text-gray-500" strokeWidth={2} />
+                </div>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="you@example.com"
+                  className="w-full pl-12 pr-4 py-4 border-3 border-black text-lg focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Plan Selection */}
+            <div>
+              <label className="block font-bold text-lg mb-3">Choose Your Plan</label>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  type="button"
+                  onClick={() => setSelectedPlan("free")}
+                  className={`p-6 border-3 border-black text-left transition-all duration-300 hover:scale-105 ${
+                    selectedPlan === "free"
+                      ? "bg-blue-100 ring-4 ring-blue-500"
+                      : "bg-white hover:bg-gray-50"
+                  }`}
+                  style={{
+                    boxShadow: selectedPlan === "free" ? "6px 6px 0px rgba(59,130,246,1)" : "4px 4px 0px rgba(0,0,0,1)",
+                  }}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="font-black text-2xl">FREE</div>
+                    {selectedPlan === "free" && (
+                      <div className="w-6 h-6 bg-blue-500 border-2 border-black rounded-full flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-3xl font-black mb-2">$0</div>
+                  <div className="text-sm text-gray-600">
+                    • Up to 5 users
+                    <br />
+                    • 3 productions
+                    <br />• Basic features
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSelectedPlan("pro")}
+                  className={`p-6 border-3 border-black text-left transition-all duration-300 hover:scale-105 ${
+                    selectedPlan === "pro"
+                      ? "bg-purple-100 ring-4 ring-purple-500"
+                      : "bg-white hover:bg-gray-50"
+                  }`}
+                  style={{
+                    boxShadow: selectedPlan === "pro" ? "6px 6px 0px rgba(168,85,247,1)" : "4px 4px 0px rgba(0,0,0,1)",
+                  }}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="font-black text-2xl">PRO</div>
+                    {selectedPlan === "pro" && (
+                      <div className="w-6 h-6 bg-purple-500 border-2 border-black rounded-full flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-3xl font-black mb-2">$29/mo</div>
+                  <div className="text-sm text-gray-600">
+                    • Unlimited users
+                    <br />
+                    • Unlimited productions
+                    <br />• All AI features
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full py-5 bg-yellow-300 border-3 border-black font-black text-xl hover:bg-yellow-400 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
+              style={{
+                boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+              }}
+            >
+              Create Account & Start Free
+              <ArrowRight className="w-6 h-6" strokeWidth={3} />
+            </button>
+          </form>
+
+          <div className="mt-8 text-center space-y-2">
+            <p className="text-sm text-gray-600">
+              By signing up, you agree to our Terms of Service and Privacy Policy
+            </p>
+            <p className="text-sm font-bold">
+              ✓ No credit card required • ✓ Cancel anytime • ✓ 14-day Pro trial included
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/portal/callsheet/callsheet-form.tsx">
+"use client"
+
+import { useState } from "react"
+import { Loader, Sparkles } from "lucide-react"
+
+interface CallSheetFormProps {
+  onGenerate: (formData: any) => void
+  isGenerating: boolean
+}
+
+export default function CallSheetForm({ onGenerate, isGenerating }: CallSheetFormProps) {
+  const [formData, setFormData] = useState({
+    // Production Details
+    productionTitle: "",
+    shootDate: "",
+    shootingDayNumber: 1,
+    generalCallTime: "06:00",
+    generalLocation: "",
+
+    // Shooting Range
+    shootingRange: {
+      type: "days" as "days" | "weeks" | "months",
+      duration: 1,
+    },
+
+    // Script - PRIMARY INPUT
+    script: "",
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    onGenerate(formData)
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="border-4 border-black bg-white p-8 animate-fade-in-left delay-100 opacity-0"
+      style={{ boxShadow: "8px 8px 0px rgba(0,0,0,1)" }}
+    >
+      <div className="mb-6">
+        <h2 className="text-3xl font-anton mb-2 tracking-tight">CALL SHEET GENERATOR</h2>
+        <p className="text-sm text-gray-600">
+          Paste your script below and Claude AI will automatically extract scenes, characters, locations, and generate a professional call sheet.
+        </p>
+      </div>
+
+      {/* Production Details Section */}
+      <div className="mb-8">
+        <h3 className="text-xl font-bold mb-4 pb-2 border-b-2 border-gray-300">PRODUCTION DETAILS</h3>
+
+        <div className="grid grid-cols-1 gap-4">
+          <div>
+            <label className="block text-sm font-bold mb-2">Production Title *</label>
+            <input
+              type="text"
+              required
+              value={formData.productionTitle}
+              onChange={(e) => setFormData({ ...formData, productionTitle: e.target.value })}
+              className="w-full px-4 py-2 border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="e.g., The Last Stand"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-bold mb-2">Shoot Date *</label>
+              <input
+                type="date"
+                required
+                value={formData.shootDate}
+                onChange={(e) => setFormData({ ...formData, shootDate: e.target.value })}
+                className="w-full px-4 py-2 border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold mb-2">Shooting Day # *</label>
+              <input
+                type="number"
+                required
+                min="1"
+                value={formData.shootingDayNumber}
+                onChange={(e) => setFormData({ ...formData, shootingDayNumber: parseInt(e.target.value) || 1 })}
+                className="w-full px-4 py-2 border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-bold mb-2">General Call Time *</label>
+              <input
+                type="time"
+                required
+                value={formData.generalCallTime}
+                onChange={(e) => setFormData({ ...formData, generalCallTime: e.target.value })}
+                className="w-full px-4 py-2 border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold mb-2">General Location *</label>
+              <input
+                type="text"
+                required
+                value={formData.generalLocation}
+                onChange={(e) => setFormData({ ...formData, generalLocation: e.target.value })}
+                className="w-full px-4 py-2 border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="e.g., Orange County"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-bold mb-2">Shooting Range *</label>
+            <div className="grid grid-cols-2 gap-4">
+              <input
+                type="number"
+                required
+                min="1"
+                value={formData.shootingRange.duration}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    shootingRange: { ...formData.shootingRange, duration: parseInt(e.target.value) || 1 },
+                  })
+                }
+                className="w-full px-4 py-2 border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="Duration"
+              />
+              <select
+                value={formData.shootingRange.type}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    shootingRange: { ...formData.shootingRange, type: e.target.value as "days" | "weeks" | "months" },
+                  })
+                }
+                className="w-full px-4 py-2 border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                <option value="days">Days</option>
+                <option value="weeks">Weeks</option>
+                <option value="months">Months</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Script Section - PRIMARY INPUT */}
+      <div className="mb-8">
+        <div className="flex items-center gap-2 mb-4 pb-2 border-b-2 border-gray-300">
+          <Sparkles className="w-5 h-5 text-purple-600" strokeWidth={2} />
+          <h3 className="text-xl font-bold">SCRIPT *</h3>
+        </div>
+
+        <p className="text-sm text-gray-600 mb-4 bg-purple-50 border-2 border-purple-200 p-3">
+          <strong>AI-Powered Extraction:</strong> Paste your script here. Claude will automatically analyze it to extract:
+          <br />• Scene numbers, locations, and INT/EXT/DAY/NIGHT information
+          <br />• Characters and their appearances
+          <br />• Location details and requirements
+          <br />• Any special production notes
+        </p>
+
+        <textarea
+          required
+          value={formData.script}
+          onChange={(e) => setFormData({ ...formData, script: e.target.value })}
+          className="w-full h-96 px-4 py-3 border-2 border-black focus:outline-none focus:ring-2 focus:ring-purple-400 font-mono text-sm"
+          placeholder={`Paste your script here in standard screenplay format...
+
+Example:
+
+INT. COFFEE SHOP - DAY
+
+SARAH (30s, energetic) enters the bustling coffee shop. She spots MIKE (40s, rugged) sitting in the corner booth.
+
+SARAH
+(approaching)
+You're late.
+
+MIKE
+(looking up from his phone)
+Traffic. You know how it is.
+
+---
+
+Claude will extract all the details and create a professional call sheet!`}
+        />
+
+        <div className="mt-2 text-xs text-gray-500">
+          Tip: Include scene headers (INT/EXT, location, time of day) for best results
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={isGenerating}
+        className="w-full bg-purple-500 text-white py-4 px-6 border-3 border-black font-bold text-lg hover:bg-purple-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-3"
+        style={{ boxShadow: "4px 4px 0px rgba(0,0,0,1)" }}
+      >
+        {isGenerating ? (
+          <>
+            <Loader className="w-5 h-5 animate-spin" strokeWidth={3} />
+            Generating Call Sheet with AI...
+          </>
+        ) : (
+          <>
+            <Sparkles className="w-5 h-5" strokeWidth={3} />
+            Generate Call Sheet with AI
+          </>
+        )}
+      </button>
+
+      {isGenerating && (
+        <p className="text-sm text-gray-600 text-center mt-4">
+          Claude is analyzing your script and creating a professional call sheet...
+        </p>
+      )}
+    </form>
+  )
+}
+</file>
+
+<file path="src/app/components/portal/callsheet/callsheet-preview.tsx">
+"use client"
+
+import { Loader, Download, FileText } from "lucide-react"
+
+interface CallSheetPreviewProps {
+  content: string | null
+  isGenerating: boolean
+}
+
+export default function CallSheetPreview({ content, isGenerating }: CallSheetPreviewProps) {
+  const handleDownload = () => {
+    if (!content) return
+
+    const blob = new Blob([content], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `call-sheet-${Date.now()}.txt`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
+  const handlePrint = () => {
+    if (!content) return
+
+    const printWindow = window.open('', '', 'height=600,width=800')
+    if (printWindow) {
+      printWindow.document.write('<html><head><title>Call Sheet</title>')
+      printWindow.document.write('<style>body { font-family: monospace; white-space: pre-wrap; padding: 20px; }</style>')
+      printWindow.document.write('</head><body>')
+      printWindow.document.write(content.replace(/\n/g, '<br>'))
+      printWindow.document.write('</body></html>')
+      printWindow.document.close()
+      printWindow.print()
+    }
+  }
+
+  return (
+    <div
+      className="border-4 border-black bg-white p-8 min-h-[800px] animate-fade-in-right delay-200 opacity-0 sticky top-24"
+      style={{ boxShadow: "8px 8px 0px rgba(0,0,0,1)" }}
+    >
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-3xl font-anton tracking-tight">PREVIEW</h2>
+
+        {content && (
+          <div className="flex gap-2">
+            <button
+              onClick={handleDownload}
+              className="px-4 py-2 bg-blue-400 border-2 border-black font-bold hover:bg-blue-500 transition-all duration-300 flex items-center gap-2"
+            >
+              <Download className="w-4 h-4" strokeWidth={3} />
+              Download
+            </button>
+            <button
+              onClick={handlePrint}
+              className="px-4 py-2 bg-green-400 border-2 border-black font-bold hover:bg-green-500 transition-all duration-300 flex items-center gap-2"
+            >
+              <FileText className="w-4 h-4" strokeWidth={3} />
+              Print
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="border-2 border-gray-300 bg-gray-50 p-6 min-h-[700px]">
+        {isGenerating ? (
+          <div className="flex flex-col items-center justify-center h-full">
+            <Loader className="w-12 h-12 animate-spin text-blue-600 mb-4" strokeWidth={2} />
+            <p className="text-lg font-bold text-gray-600">Generating your call sheet...</p>
+            <p className="text-sm text-gray-500 mt-2">This may take a few seconds</p>
+          </div>
+        ) : content ? (
+          <div className="prose prose-sm max-w-none">
+            <pre className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{content}</pre>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full text-center">
+            <FileText className="w-16 h-16 text-gray-300 mb-4" strokeWidth={2} />
+            <p className="text-lg font-bold text-gray-400">No call sheet generated yet</p>
+            <p className="text-sm text-gray-400 mt-2">
+              Fill out the form and click "Generate Call Sheet with AI"
+              <br />
+              to see your professional call sheet here
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+</file>
+
+<file path="src/app/components/portal/dashboard-hero.tsx">
+"use client"
+
+import { Sparkles, TrendingUp } from "lucide-react"
+
+export default function DashboardHero() {
+  return (
+    <section className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 py-12 px-6 border-b-4 border-black overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-start justify-between">
+          <div className="animate-fade-in-left opacity-0">
+            <div className="mb-4 inline-flex items-center gap-2 px-3 py-1 bg-yellow-300 border-2 border-black text-xs font-black tracking-wider">
+              <Sparkles className="w-3 h-3" />
+              <span>PRO PLAN</span>
+            </div>
+            <h1 className="text-5xl font-anton mb-3 text-white tracking-tight">
+              WELCOME BACK, JOHN
+            </h1>
+            <p className="text-lg text-white/90 mb-4">
+              You have 3 active projects and 5 upcoming shoots this week.
+            </p>
+          </div>
+
+          {/* Stats Cards */}
+          <div className="flex gap-4 animate-fade-in-right delay-200 opacity-0">
+            <div
+              className="border-3 border-black bg-white p-4 min-w-[140px] hover:scale-105 transition-all duration-300"
+              style={{ boxShadow: "4px 4px 0px rgba(0,0,0,1)" }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp className="w-4 h-4 text-green-600" strokeWidth={3} />
+                <span className="text-xs font-bold text-gray-600">THIS WEEK</span>
+              </div>
+              <div className="text-3xl font-anton mb-1">12</div>
+              <div className="text-xs text-gray-600">Tasks Completed</div>
+            </div>
+
+            <div
+              className="border-3 border-black bg-yellow-100 p-4 min-w-[140px] hover:scale-105 transition-all duration-300"
+              style={{ boxShadow: "4px 4px 0px rgba(0,0,0,1)" }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Sparkles className="w-4 h-4 text-purple-600" strokeWidth={3} />
+                <span className="text-xs font-bold text-gray-600">TEAM SIZE</span>
+              </div>
+              <div className="text-3xl font-anton mb-1">24</div>
+              <div className="text-xs text-gray-600">Active Members</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/portal/portal-header.tsx">
+"use client"
+
+import { CalendarIcon, Bell, Settings, User, LogOut, ChevronDown } from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
+
+export default function PortalHeader() {
+  const [showUserMenu, setShowUserMenu] = useState(false)
+
+  return (
+    <header className="border-b-4 border-blue-500 bg-white sticky top-0 z-50">
+      <div className="flex items-center justify-between px-8 py-4 max-w-7xl mx-auto">
+        {/* Logo */}
+        <Link href="/portal" className="flex items-center gap-2 hover:scale-105 transition-all duration-300">
+          <CalendarIcon className="w-8 h-8" strokeWidth={3} />
+          <span className="text-2xl font-anton tracking-wide">FRAMEBOARD</span>
+        </Link>
+
+        {/* Navigation */}
+        <nav className="flex items-center gap-6">
+          <Link
+            href="/portal/projects"
+            className="font-semibold text-base hover:text-blue-600 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Projects
+          </Link>
+          <Link
+            href="/portal/schedule"
+            className="font-semibold text-base hover:text-purple-600 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Schedule
+          </Link>
+          <Link
+            href="/portal/storyboard"
+            className="font-semibold text-base hover:text-pink-600 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Storyboard
+          </Link>
+          <Link
+            href="/portal/callsheet"
+            className="font-semibold text-base hover:text-red-600 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Call Sheets
+          </Link>
+          <Link
+            href="/portal/team"
+            className="font-semibold text-base hover:text-green-600 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Team
+          </Link>
+
+          {/* Notifications */}
+          <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-all duration-300 hover:scale-110">
+            <Bell className="w-5 h-5" strokeWidth={2} />
+            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+
+          {/* User Menu */}
+          <div className="relative">
+            <button
+              onClick={() => setShowUserMenu(!showUserMenu)}
+              className="flex items-center gap-2 px-4 py-2 border-2 border-black hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+            >
+              <div className="w-8 h-8 bg-blue-500 border-2 border-black rounded-full flex items-center justify-center">
+                <User className="w-4 h-4 text-white" strokeWidth={3} />
+              </div>
+              <span className="font-semibold text-sm">John Doe</span>
+              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showUserMenu ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Dropdown Menu */}
+            {showUserMenu && (
+              <div
+                className="absolute right-0 mt-2 w-56 bg-white border-3 border-black animate-scale-in"
+                style={{ boxShadow: "4px 4px 0px rgba(0,0,0,1)" }}
+              >
+                <div className="p-3 border-b-2 border-gray-200">
+                  <div className="font-bold text-sm">John Doe</div>
+                  <div className="text-xs text-gray-600">john@example.com</div>
+                </div>
+
+                <Link
+                  href="/portal/settings"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 transition-all duration-200"
+                >
+                  <Settings className="w-4 h-4" strokeWidth={2} />
+                  <span className="text-sm font-semibold">Settings</span>
+                </Link>
+
+                <Link
+                  href="/"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-red-50 transition-all duration-200 border-t-2 border-gray-200"
+                >
+                  <LogOut className="w-4 h-4" strokeWidth={2} />
+                  <span className="text-sm font-semibold">Log Out</span>
+                </Link>
+              </div>
+            )}
+          </div>
+        </nav>
+      </div>
+      {/* Dashed line separator */}
+      <div className="border-t-2 border-dashed border-blue-400"></div>
+    </header>
+  )
+}
+</file>
+
+<file path="src/app/components/portal/projects-overview.tsx">
+"use client"
+
+import { Film, Clock, Users, MoreVertical, Calendar } from "lucide-react"
+import Link from "next/link"
+
+export default function ProjectsOverview() {
+  const projects = [
+    {
+      id: 1,
+      title: "Summer Road Trip",
+      status: "In Production",
+      progress: 65,
+      dueDate: "Dec 15, 2024",
+      team: 8,
+      color: "blue",
+    },
+    {
+      id: 2,
+      title: "Documentary: City Life",
+      status: "Pre-Production",
+      progress: 40,
+      dueDate: "Jan 20, 2025",
+      team: 5,
+      color: "purple",
+    },
+    {
+      id: 3,
+      title: "Music Video - Eclipse",
+      status: "Planning",
+      progress: 15,
+      dueDate: "Feb 10, 2025",
+      team: 6,
+      color: "pink",
+    },
+  ]
+
+  return (
+    <section className="bg-white py-12 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h2 className="text-4xl font-anton mb-2 tracking-tight">YOUR PROJECTS</h2>
+            <p className="text-gray-600">Manage and track all your film productions</p>
+          </div>
+          <Link href="/portal/projects/new">
+            <button className="px-6 py-3 bg-yellow-300 border-3 border-black font-bold hover:bg-yellow-400 hover:scale-105 transition-all duration-300">
+              + New Project
+            </button>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              className={`border-4 border-black bg-${project.color}-50 p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-scale-in delay-${(index + 1) * 100} opacity-0`}
+              style={{ boxShadow: "6px 6px 0px rgba(0,0,0,1)" }}
+            >
+              {/* Project Header */}
+              <div className="flex items-start justify-between mb-4">
+                <div className={`w-12 h-12 bg-${project.color}-400 border-3 border-black rounded-lg flex items-center justify-center`}>
+                  <Film className="w-6 h-6 text-white" strokeWidth={3} />
+                </div>
+                <button className="p-2 hover:bg-white/50 rounded transition-all duration-200">
+                  <MoreVertical className="w-4 h-4" strokeWidth={2} />
+                </button>
+              </div>
+
+              {/* Project Title */}
+              <h3 className="text-xl font-anton mb-2 tracking-tight">{project.title}</h3>
+
+              {/* Status Badge */}
+              <div className="inline-block px-3 py-1 bg-white border-2 border-black text-xs font-bold mb-4">
+                {project.status}
+              </div>
+
+              {/* Progress Bar */}
+              <div className="mb-4">
+                <div className="flex justify-between text-xs font-bold mb-2">
+                  <span>Progress</span>
+                  <span>{project.progress}%</span>
+                </div>
+                <div className="h-3 bg-white border-2 border-black">
+                  <div
+                    className={`h-full bg-${project.color}-500 transition-all duration-500`}
+                    style={{ width: `${project.progress}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Project Meta */}
+              <div className="flex items-center gap-4 text-sm text-gray-700">
+                <div className="flex items-center gap-1">
+                  <Calendar className="w-4 h-4" strokeWidth={2} />
+                  <span className="text-xs">{project.dueDate}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Users className="w-4 h-4" strokeWidth={2} />
+                  <span className="text-xs">{project.team} members</span>
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <Link href={`/portal/projects/${project.id}`}>
+                <button className="w-full mt-4 py-2 border-2 border-black font-bold text-sm hover:bg-white transition-all duration-300">
+                  Open Project →
+                </button>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/portal/quick-actions.tsx">
+"use client"
+
+import { Calendar, Film, Users, MapPin, FileText, Sparkles } from "lucide-react"
+import Link from "next/link"
+
+export default function QuickActions() {
+  const actions = [
+    { icon: Calendar, label: "Schedule Shoot", color: "blue", href: "/portal/schedule/new" },
+    { icon: Film, label: "New Storyboard", color: "purple", href: "/portal/storyboard/new" },
+    { icon: Users, label: "Invite Team", color: "green", href: "/portal/team/invite" },
+    { icon: MapPin, label: "Find Location", color: "orange", href: "/portal/locations" },
+    { icon: FileText, label: "Generate Call Sheet", color: "red", href: "/portal/callsheet" },
+    { icon: Sparkles, label: "AI Assistant", color: "pink", href: "/portal/ai" },
+  ]
+
+  return (
+    <section className="bg-gray-50 py-12 px-6 border-y-4 border-black">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl font-anton mb-6 tracking-tight">QUICK ACTIONS</h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+          {actions.map((action, index) => {
+            const Icon = action.icon
+            return (
+              <Link key={action.label} href={action.href}>
+                <button
+                  className={`w-full border-3 border-black bg-white p-6 hover:bg-${action.color}-50 hover:scale-105 hover:shadow-lg transition-all duration-300 animate-fade-in-up delay-${index * 100} opacity-0`}
+                  style={{ boxShadow: "4px 4px 0px rgba(0,0,0,1)" }}
+                >
+                  <div className={`w-12 h-12 bg-${action.color}-400 border-3 border-black rounded-lg flex items-center justify-center mx-auto mb-3`}>
+                    <Icon className="w-6 h-6 text-white" strokeWidth={3} />
+                  </div>
+                  <div className="text-sm font-bold text-center">{action.label}</div>
+                </button>
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/portal/recent-activity.tsx">
+"use client"
+
+import { Film, Calendar, Users, FileText, Clock } from "lucide-react"
+
+export default function RecentActivity() {
+  const activities = [
+    {
+      id: 1,
+      type: "project",
+      icon: Film,
+      action: "Updated storyboard",
+      project: "Summer Road Trip",
+      user: "Sarah Chen",
+      time: "2 hours ago",
+      color: "blue",
+    },
+    {
+      id: 2,
+      type: "schedule",
+      icon: Calendar,
+      action: "Created shoot schedule",
+      project: "Documentary: City Life",
+      user: "Mike Johnson",
+      time: "4 hours ago",
+      color: "purple",
+    },
+    {
+      id: 3,
+      type: "team",
+      icon: Users,
+      action: "Invited 3 new members",
+      project: "Music Video - Eclipse",
+      user: "Emily Davis",
+      time: "6 hours ago",
+      color: "green",
+    },
+    {
+      id: 4,
+      type: "callsheet",
+      icon: FileText,
+      action: "Generated call sheet",
+      project: "Summer Road Trip",
+      user: "John Doe",
+      time: "1 day ago",
+      color: "orange",
+    },
+  ]
+
+  return (
+    <section className="bg-white py-12 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-4xl font-anton tracking-tight">RECENT ACTIVITY</h2>
+          <button className="text-sm font-bold text-blue-600 hover:underline transition-all duration-200">
+            View All →
+          </button>
+        </div>
+
+        <div className="space-y-4">
+          {activities.map((activity, index) => {
+            const Icon = activity.icon
+            return (
+              <div
+                key={activity.id}
+                className={`border-3 border-black bg-white p-6 hover:bg-gray-50 hover:shadow-lg transition-all duration-300 animate-fade-in-left delay-${index * 100} opacity-0`}
+                style={{ boxShadow: "4px 4px 0px rgba(0,0,0,1)" }}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={`w-12 h-12 bg-${activity.color}-400 border-3 border-black rounded-lg flex items-center justify-center flex-shrink-0`}>
+                    <Icon className="w-6 h-6 text-white" strokeWidth={3} />
+                  </div>
+
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-bold text-lg">{activity.user}</span>
+                      <span className="text-gray-600">{activity.action}</span>
+                    </div>
+                    <div className="flex items-center gap-4 text-sm text-gray-600">
+                      <span className="font-semibold">{activity.project}</span>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" strokeWidth={2} />
+                        <span>{activity.time}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button className="px-4 py-2 border-2 border-black font-bold text-sm hover:bg-gray-100 transition-all duration-200">
+                    View
+                  </button>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/pricing/faq-section.tsx">
+"use client"
+
+import { useState } from "react"
+import { ChevronDown } from "lucide-react"
+
+export default function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
+
+  const faqs = [
+    {
+      question: "Can I try Pro features before paying?",
+      answer: "Yes! All new users get a 14-day free trial of Pro features. No credit card required. After the trial, you can choose to continue with Pro or switch to the Free plan."
+    },
+    {
+      question: "What happens when I reach the Free plan limits?",
+      answer: "On the Free plan, you're limited to 3 productions and 5 team members. When you reach these limits, you'll need to upgrade to Pro to create more productions or add more team members. Your existing data remains safe."
+    },
+    {
+      question: "Can I upgrade or downgrade anytime?",
+      answer: "Absolutely! You can upgrade to Pro at any time to unlock AI features and unlimited projects. If you downgrade from Pro to Free, you'll keep your data but access will be limited to Free plan features."
+    },
+    {
+      question: "What payment methods do you accept?",
+      answer: "We accept all major credit cards (Visa, Mastercard, American Express) and PayPal. Annual subscriptions can be paid via invoice for studios and production companies."
+    },
+    {
+      question: "Is there a discount for annual billing?",
+      answer: "Yes! Annual Pro subscribers save 17% compared to monthly billing. That's $290/year instead of $348/year, saving you $58."
+    },
+    {
+      question: "What's included in the AI features?",
+      answer: "Pro plan includes AI-powered scheduling optimization, automated storyboard generation from scripts, intelligent location recommendations, actor matching based on character descriptions, and conflict detection for complex productions."
+    },
+    {
+      question: "Do you offer refunds?",
+      answer: "Yes! If you're not satisfied within the first 30 days of your Pro subscription, we'll give you a full refund. No questions asked."
+    },
+    {
+      question: "Can I import my existing production data?",
+      answer: "Pro users can import data from Final Draft, Celtx, and other common formats. We also support bulk CSV imports for schedules and contact lists. Our team can help with larger migrations during onboarding."
+    },
+    {
+      question: "Is my data secure?",
+      answer: "Absolutely. All data is encrypted in transit and at rest. We use industry-standard security practices and host on secure cloud infrastructure. We never share your production data with third parties."
+    },
+    {
+      question: "Do you offer team or studio pricing?",
+      answer: "For teams over 20 users or studios with multiple productions, contact us for custom enterprise pricing. We offer volume discounts, dedicated support, and additional features for larger organizations."
+    }
+  ]
+
+  return (
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-green-300 border-2 border-black font-black text-sm tracking-wider">
+              QUESTIONS?
+            </span>
+          </div>
+          <h2 className="text-5xl font-black mb-6 leading-tight">
+            FREQUENTLY ASKED
+            <br />
+            QUESTIONS
+          </h2>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="border-4 border-black bg-white overflow-hidden"
+              style={{
+                boxShadow: "4px 4px 0px rgba(0,0,0,1)",
+              }}
+            >
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="w-full px-8 py-6 flex items-center justify-between hover:bg-gray-50 transition text-left"
+              >
+                <span className="font-black text-lg pr-4">{faq.question}</span>
+                <ChevronDown
+                  className={`w-6 h-6 flex-shrink-0 transition-transform ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
+                  strokeWidth={3}
+                />
+              </button>
+              {openIndex === index && (
+                <div className="px-8 pb-6 border-t-2 border-gray-200 pt-6">
+                  <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-gray-600 mb-4">Still have questions?</p>
+          <button className="px-8 py-3 bg-blue-400 border-3 border-black font-bold hover:bg-blue-500 transition">
+            Contact Support
+          </button>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/pricing/feature-comparison.tsx">
+"use client"
+
+import { Check, X, Sparkles } from "lucide-react"
+
+export default function FeatureComparison() {
+  const features = [
+    {
+      category: "CORE FEATURES",
+      items: [
+        { name: "Production Dashboard", free: true, pro: true },
+        { name: "Team Members", free: "Up to 5", pro: "Unlimited" },
+        { name: "Active Productions", free: "Up to 3", pro: "Unlimited" },
+        { name: "Cloud Storage", free: "1 GB", pro: "50 GB" },
+        { name: "Call Sheet Templates", free: "Basic", pro: "Advanced + Custom" },
+      ]
+    },
+    {
+      category: "SCHEDULING",
+      items: [
+        { name: "Manual Scheduling", free: true, pro: true },
+        { name: "Availability Tracking", free: true, pro: true },
+        { name: "AI Schedule Optimization", free: false, pro: true, ai: true },
+        { name: "Conflict Detection", free: "Basic", pro: "AI-Powered", ai: true },
+        { name: "Multi-day Productions", free: false, pro: true },
+      ]
+    },
+    {
+      category: "STORYBOARDING & SHOT LISTS",
+      items: [
+        { name: "Manual Storyboards", free: true, pro: true },
+        { name: "Shot List Management", free: "Basic", pro: "Advanced" },
+        { name: "AI Visual Generation", free: false, pro: true, ai: true },
+        { name: "Script to Storyboard", free: false, pro: true, ai: true },
+        { name: "Shot Versioning", free: false, pro: true },
+        { name: "Reference Library", free: "Limited", pro: "Unlimited" },
+      ]
+    },
+    {
+      category: "LOCATION & CASTING",
+      items: [
+        { name: "Manual Location Entry", free: true, pro: true },
+        { name: "AI Location Finder", free: false, pro: true, ai: true },
+        { name: "AI Actor Matching", free: false, pro: true, ai: true },
+        { name: "Audition Management", free: false, pro: true },
+      ]
+    },
+    {
+      category: "COLLABORATION",
+      items: [
+        { name: "Role-Based Permissions", free: "Basic", pro: "Advanced" },
+        { name: "Real-time Notifications", free: true, pro: true },
+        { name: "Team Messaging", free: "Limited", pro: "Unlimited" },
+        { name: "File Sharing", free: "Limited", pro: "Unlimited" },
+      ]
+    },
+    {
+      category: "INTEGRATIONS & EXPORTS",
+      items: [
+        { name: "PDF Export", free: true, pro: true },
+        { name: "Bulk Data Import", free: false, pro: true },
+        { name: "Final Draft Integration", free: false, pro: true },
+        { name: "Google Drive Sync", free: false, pro: true },
+        { name: "Custom Branding", free: false, pro: true },
+      ]
+    },
+    {
+      category: "SUPPORT",
+      items: [
+        { name: "Email Support", free: "Standard", pro: "Priority" },
+        { name: "Chat Support", free: false, pro: true },
+        { name: "Onboarding Sessions", free: false, pro: true },
+        { name: "Early Feature Access", free: false, pro: true },
+      ]
+    },
+  ]
+
+  const renderCell = (value: boolean | string) => {
+    if (value === true) {
+      return <Check className="w-6 h-6 text-green-600 mx-auto" strokeWidth={3} />
+    } else if (value === false) {
+      return <X className="w-6 h-6 text-gray-300 mx-auto" strokeWidth={2} />
+    } else {
+      return <span className="text-sm font-bold text-gray-700">{value}</span>
+    }
+  }
+
+  return (
+    <section className="bg-gray-50 py-20 px-6 border-y-4 border-black">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-blue-300 border-2 border-black font-black text-sm tracking-wider">
+              DETAILED COMPARISON
+            </span>
+          </div>
+          <h2 className="text-5xl font-black mb-6 leading-tight">
+            COMPARE PLANS
+            <br />
+            FEATURE BY FEATURE
+          </h2>
+        </div>
+
+        <div
+          className="border-4 border-black bg-white overflow-hidden"
+          style={{
+            boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+          }}
+        >
+          {/* Header */}
+          <div className="grid grid-cols-3 border-b-4 border-black bg-gray-100">
+            <div className="p-6 border-r-4 border-black">
+              <span className="font-black text-lg">FEATURES</span>
+            </div>
+            <div className="p-6 border-r-4 border-black text-center">
+              <span className="font-black text-lg">FREE</span>
+              <div className="text-xs text-gray-600 mt-1">$0/month</div>
+            </div>
+            <div className="p-6 text-center bg-purple-50">
+              <span className="font-black text-lg">PRO</span>
+              <div className="text-xs text-gray-700 mt-1">$29/month</div>
+            </div>
+          </div>
+
+          {/* Feature Categories */}
+          {features.map((category, categoryIndex) => (
+            <div key={categoryIndex}>
+              <div className="px-6 py-4 bg-yellow-100 border-b-2 border-black">
+                <span className="font-black text-sm tracking-wider">{category.category}</span>
+              </div>
+              {category.items.map((item, itemIndex) => (
+                <div
+                  key={itemIndex}
+                  className={`grid grid-cols-3 border-b-2 border-gray-200 hover:bg-gray-50 transition ${
+                    itemIndex === category.items.length - 1 && categoryIndex !== features.length - 1
+                      ? "border-b-4 border-black"
+                      : ""
+                  }`}
+                >
+                  <div className="p-4 border-r-2 border-gray-200 flex items-center gap-2">
+                    <span className="text-sm font-semibold">{item.name}</span>
+                    {item.ai && (
+                      <Sparkles className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                    )}
+                  </div>
+                  <div className="p-4 border-r-2 border-gray-200 text-center flex items-center justify-center">
+                    {renderCell(item.free)}
+                  </div>
+                  <div className="p-4 bg-purple-50/30 text-center flex items-center justify-center">
+                    {renderCell(item.pro)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-black">
+            <Sparkles className="w-5 h-5 text-purple-600" />
+            <span className="text-sm font-bold">
+              Features marked with sparkle are <strong>AI-Powered</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/pricing/pricing-cta.tsx">
+"use client"
+
+import { ArrowRight, Check } from "lucide-react"
+
+export default function PricingCTA() {
+  return (
+    <section className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 py-24 px-6 border-t-4 border-black">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-6xl md:text-7xl font-black mb-6 leading-tight text-white">
+            READY TO START
+            <br />
+            YOUR NEXT PRODUCTION?
+          </h2>
+          <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
+            Join hundreds of filmmakers who are creating better films with less stress.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {/* Free CTA */}
+          <div
+            className="border-4 border-black bg-white p-8 text-center"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="mb-6">
+              <h3 className="font-black text-3xl mb-2">Start Free</h3>
+              <p className="text-gray-600">Perfect for your first project</p>
+            </div>
+
+            <div className="space-y-3 mb-8 text-left">
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="text-sm font-semibold">Up to 5 team members</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="text-sm font-semibold">3 active productions</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-600" strokeWidth={3} />
+                <span className="text-sm font-semibold">Core pre-production tools</span>
+              </div>
+            </div>
+
+            <button className="w-full px-8 py-4 bg-white border-3 border-black font-black text-lg hover:bg-gray-50 transition flex items-center justify-center gap-2">
+              Get Started Free
+              <ArrowRight className="w-5 h-5" strokeWidth={3} />
+            </button>
+          </div>
+
+          {/* Pro CTA */}
+          <div
+            className="border-4 border-black bg-gradient-to-br from-purple-100 to-blue-100 p-8 text-center"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="mb-6">
+              <div className="inline-block px-3 py-1 bg-yellow-300 border-2 border-black font-black text-xs mb-3">
+                RECOMMENDED
+              </div>
+              <h3 className="font-black text-3xl mb-2">Start Pro Trial</h3>
+              <p className="text-gray-700">14 days free, then $29/month</p>
+            </div>
+
+            <div className="space-y-3 mb-8 text-left">
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-purple-600" strokeWidth={3} />
+                <span className="text-sm font-semibold">Unlimited everything</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-purple-600" strokeWidth={3} />
+                <span className="text-sm font-semibold">All AI-powered features</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-purple-600" strokeWidth={3} />
+                <span className="text-sm font-semibold">Priority support</span>
+              </div>
+            </div>
+
+            <button className="w-full px-8 py-4 bg-black text-white border-3 border-black font-black text-lg hover:bg-gray-800 transition flex items-center justify-center gap-2">
+              Start Pro Trial
+              <ArrowRight className="w-5 h-5" strokeWidth={3} />
+            </button>
+            <p className="text-xs text-gray-600 mt-3">No credit card required</p>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <div
+            className="inline-block border-4 border-black bg-white px-8 py-6"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="flex items-center justify-center gap-12 flex-wrap">
+              <div className="text-center">
+                <div className="font-black text-3xl mb-1">500+</div>
+                <div className="text-sm text-gray-600">Happy Users</div>
+              </div>
+              <div className="w-px h-12 bg-black"></div>
+              <div className="text-center">
+                <div className="font-black text-3xl mb-1">1000+</div>
+                <div className="text-sm text-gray-600">Productions</div>
+              </div>
+              <div className="w-px h-12 bg-black"></div>
+              <div className="text-center">
+                <div className="font-black text-3xl mb-1">4.9/5</div>
+                <div className="text-sm text-gray-600">User Rating</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/pricing/pricing-hero.tsx">
+"use client"
+
+import { Sparkles } from "lucide-react"
+
+export default function PricingHero() {
+  return (
+    <section className="bg-gradient-to-b from-purple-50 to-white py-24 px-6 border-b-4 border-black overflow-hidden">
+      <div className="max-w-6xl mx-auto text-center">
+        <div className="mb-8 inline-block animate-scale-in opacity-0">
+          <span className="px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider">
+            SIMPLE PRICING
+          </span>
+        </div>
+
+        <h1 className="text-7xl font-anton mb-6 leading-tight tracking-tight animate-fade-in-up delay-100 opacity-0">
+          START FREE,
+          <br />
+          SCALE AS YOU GROW
+        </h1>
+
+        <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto animate-fade-in-up delay-200 opacity-0">
+          Get started with powerful pre-production tools for free. Upgrade to Pro when you need unlimited projects and AI automation.
+        </p>
+
+        <div className="flex items-center justify-center gap-4 mb-12 animate-fade-in-up delay-300 opacity-0">
+          <div className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-black hover:scale-105 transition-all duration-300">
+            <Sparkles className="w-5 h-5 text-purple-600" />
+            <span className="font-bold text-sm">14-Day Pro Trial</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-black hover:scale-105 transition-all duration-300">
+            <span className="text-2xl">💳</span>
+            <span className="font-bold text-sm">No Credit Card Required</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-black hover:scale-105 transition-all duration-300">
+            <span className="text-2xl">✓</span>
+            <span className="font-bold text-sm">Cancel Anytime</span>
+          </div>
+        </div>
+
+        <div className="inline-flex items-center gap-3 px-6 py-3 bg-green-100 border-3 border-black hover:scale-105 transition-all duration-300 animate-scale-in delay-400 opacity-0">
+          <span className="text-3xl">🎉</span>
+          <div className="text-left">
+            <div className="font-black text-sm">LAUNCH SPECIAL</div>
+            <div className="text-xs text-gray-700">Save 20% on annual plans</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/pricing/pricing-plans.tsx">
+"use client"
+
+import { Check, Sparkles, Zap, Users } from "lucide-react"
+
+export default function PricingPlans() {
+  return (
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Free Plan */}
+          <div
+            className="border-4 border-black bg-white p-10 relative"
+            style={{
+              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <div className="mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-blue-400 border-3 border-black rounded-lg flex items-center justify-center">
+                  <Users className="w-6 h-6 text-white" strokeWidth={3} />
+                </div>
+                <div>
+                  <h3 className="font-black text-3xl">FREE</h3>
+                  <p className="text-sm text-gray-600">Perfect for small projects</p>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-6xl font-black">$0</span>
+                  <span className="text-gray-600 font-bold">/month</span>
+                </div>
+                <p className="text-sm text-gray-600 mt-2">Forever free • Up to 5 team members</p>
+              </div>
+
+              <button className="w-full px-8 py-4 bg-white border-3 border-black font-black text-lg hover:bg-gray-50 transition mb-8">
+                Get Started Free
+              </button>
+            </div>
+
+            <div className="space-y-4 mb-6">
+              <div className="font-black text-sm text-gray-500 uppercase tracking-wider mb-4">
+                What's Included:
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Centralized scheduling</strong> for small teams</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Basic storyboard & shot list</strong> maker (manual uploads)</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Crew coordination</strong> for core roles</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Call sheet creation</strong> with basic templates</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Team management</strong> with basic role assignments</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Manual availability input</strong> for cast & crew</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Production dashboard</strong> with notifications</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Limited cloud storage</strong> for files & media</span>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t-2 border-gray-200">
+              <div className="text-xs text-gray-600">
+                <strong>Limitations:</strong> Up to 3 productions, basic features only, no AI tools
+              </div>
+            </div>
+          </div>
+
+          {/* Pro Plan */}
+          <div
+            className="border-4 border-black bg-gradient-to-br from-purple-100 to-blue-100 p-10 relative"
+            style={{
+              boxShadow: "8px 8px 0px rgba(0,0,0,1)",
+            }}
+          >
+            {/* Popular Badge */}
+            <div className="absolute -top-4 right-8">
+              <div className="px-4 py-2 bg-yellow-300 border-3 border-black font-black text-xs tracking-wider flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
+                MOST POPULAR
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-purple-500 border-3 border-black rounded-lg flex items-center justify-center">
+                  <Zap className="w-6 h-6 text-white" strokeWidth={3} />
+                </div>
+                <div>
+                  <h3 className="font-black text-3xl">PRO</h3>
+                  <p className="text-sm text-gray-700">For professional filmmakers</p>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-6xl font-black">$29</span>
+                  <span className="text-gray-700 font-bold">/month</span>
+                </div>
+                <div className="mt-2 space-y-1">
+                  <p className="text-sm font-bold text-purple-700">or $290/year (save 17%)</p>
+                  <p className="text-sm text-gray-700">Unlimited team members</p>
+                </div>
+              </div>
+
+              <button className="w-full px-8 py-4 bg-black text-white border-3 border-black font-black text-lg hover:bg-gray-800 transition mb-4">
+                Start 14-Day Free Trial
+              </button>
+              <p className="text-xs text-center text-gray-600">No credit card required</p>
+            </div>
+
+            <div className="space-y-4 mb-6">
+              <div className="font-black text-sm text-gray-700 uppercase tracking-wider mb-4">
+                Everything in Free, plus:
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-5 h-5 bg-purple-600 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Sparkles className="w-3 h-3 text-white" strokeWidth={3} />
+                </div>
+                <span className="text-sm font-semibold"><strong>Unlimited productions</strong> and team size</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-5 h-5 bg-purple-600 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Sparkles className="w-3 h-3 text-white" strokeWidth={3} />
+                </div>
+                <span className="text-sm font-semibold"><strong>AI scheduling assistant</strong> with automated optimization</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-5 h-5 bg-purple-600 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Sparkles className="w-3 h-3 text-white" strokeWidth={3} />
+                </div>
+                <span className="text-sm font-semibold"><strong>AI-powered storyboard generation</strong> from scripts</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-5 h-5 bg-purple-600 rounded flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Sparkles className="w-3 h-3 text-white" strokeWidth={3} />
+                </div>
+                <span className="text-sm font-semibold"><strong>Automated location & actor finding</strong> with AI</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Advanced shot list management</strong> with versioning</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Crew analytics & availability heatmaps</strong></span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Bulk imports & integrations</strong> (Final Draft, Google Drive)</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Priority email & chat support</strong></span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Increased storage</strong> for assets</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Export all reports</strong> in multiple formats</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Custom branding</strong> for reports & call sheets</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
+                <span className="text-sm"><strong>Early access</strong> to new features</span>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t-2 border-purple-300">
+              <div className="px-4 py-3 bg-white/80 border-2 border-black rounded text-center">
+                <div className="font-black text-sm mb-1">🎬 BEST VALUE</div>
+                <div className="text-xs text-gray-700">Perfect for indie filmmakers & studios</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/benefits-section.tsx">
+"use client"
+
+import { Zap } from "lucide-react"
+
+export default function BenefitsSection() {
+  return (
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider">
+              BENEFITS
+            </span>
+          </div>
+          <h2 className="text-5xl font-black mb-6 leading-tight">
+            EVERYTHING IS BUILT TO
+            <br />
+            HELP YOU CREATE BETTER
+            <br />
+            FILMS
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            From storyboarding to scheduling. Frameboard streamlines every step of pre-production, so you and your team
+            can focus on creativity–not admin.
+          </p>
+        </div>
+
+        {/* Benefits Grid */}
+        <div className="grid grid-cols-2 gap-6">
+          {/* Storyboard & Shotlist - Large Yellow Card */}
+          <div
+            className="border-4 border-black bg-yellow-200 p-8 row-span-2"
+            style={{
+              boxShadow: "4px 4px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <h3 className="font-black text-2xl mb-4 leading-tight">
+              STORYBOARD &<br />
+              SHOTLIST BUILDER
+              <br />
+              THAT WORKS
+            </h3>
+            <p className="text-gray-800 leading-relaxed mb-8">
+              Create scenes, add visual references, and organize shotlists with an editor tailored for filmmakers.
+            </p>
+
+            {/* Nested Card */}
+            <div className="border-3 border-gray-300 bg-blue-50 p-4 rounded-lg">
+              <div className="flex items-center gap-2 mb-3">
+                <Zap className="w-5 h-5 text-blue-600" />
+                <span className="font-bold text-sm">Basic: HTML and CSS</span>
+              </div>
+              <div className="flex gap-4 text-xs text-gray-600">
+                <span className="flex items-center gap-1">📐 2k</span>
+                <span className="flex items-center gap-1">📄 8</span>
+                <span className="flex items-center gap-1">👥 22</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Automated Schedules - White Card */}
+          <div
+            className="border-4 border-black bg-white p-8"
+            style={{
+              boxShadow: "4px 4px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <h3 className="font-black text-xl mb-4 leading-tight">
+              AUTOMATED
+              <br />
+              SCHEDULES AND
+              <br />
+              REMINDERS
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              Instantly generate call sheets, send shoot reminders, and keep your crew in sync–no manual work.
+            </p>
+          </div>
+
+          {/* One Dashboard - White Card */}
+          <div
+            className="border-4 border-black bg-white p-8"
+            style={{
+              boxShadow: "4px 4px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <h3 className="font-black text-xl mb-4 leading-tight">
+              ONE
+              <br />
+              DASHBOARD
+              <br />
+              FOR YOUR FILM
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              All your storyboards, scripts, schedules, and feedback–organized and accessible from a single workspace.
+            </p>
+          </div>
+
+          {/* Track Progress - Teal Card with Gauge */}
+          <div
+            className="border-4 border-black bg-teal-50 p-8"
+            style={{
+              boxShadow: "4px 4px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <h3 className="font-black text-xl mb-4 leading-tight">
+              TRACK PROJECT
+              <br />
+              PROGRESS
+            </h3>
+            <p className="text-gray-700 mb-6">
+              See what's done, what's pending, and who's responsible–so you're always one step ahead.
+            </p>
+
+            {/* Gauge Chart Placeholder */}
+            <div className="border-3 border-gray-300 bg-white p-6 rounded-lg flex flex-col items-center">
+              <div className="text-sm text-gray-600 mb-2">Point Progress</div>
+              <div className="w-24 h-24 rounded-full border-4 border-teal-400 border-r-orange-300 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-xs text-gray-600 mb-1">Your Point</div>
+                  <div className="font-black">8,966</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Smart Location & Cast Finder - Beige Card */}
+          <div
+            className="border-4 border-black bg-yellow-50 p-8"
+            style={{
+              boxShadow: "4px 4px 0px rgba(0,0,0,1)",
+            }}
+          >
+            <h3 className="font-black text-xl mb-4 leading-tight">
+              SMART LOCATION
+              <br />& CAST FINDER
+            </h3>
+            <p className="text-gray-700 mb-6">
+              Automatically discover nearby locations and actors that match your script or shotlist–so you never waste
+              time searching.
+            </p>
+
+            {/* Leaderboard Placeholder */}
+            <div className="border-3 border-gray-300 bg-white p-4 rounded-lg text-xs">
+              <div className="font-bold mb-3">Leader Board</div>
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span>1.</span>
+                  <span className="text-gray-600">Charlie Rouard</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>2.</span>
+                  <span className="text-gray-600">Ariana Agreeed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/header.tsx">
+"use client"
+
+import { CalendarIcon } from "lucide-react"
+import Link from "next/link"
+
+export default function Header() {
+  return (
+    <header className="border-b-4 border-blue-500 bg-white sticky top-0 z-50">
+      <div className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 hover:scale-105 transition-all duration-300">
+          <CalendarIcon className="w-8 h-8" strokeWidth={3} />
+          <span className="text-2xl font-anton tracking-wide">FRAMEBOARD</span>
+        </Link>
+
+        {/* Navigation */}
+        <nav className="flex items-center gap-8">
+          <Link href="/features" className="font-semibold text-base hover:text-blue-600 hover:-translate-y-0.5 transition-all duration-300">
+            Features
+          </Link>
+          <Link href="/about" className="font-semibold text-base hover:text-purple-600 hover:-translate-y-0.5 transition-all duration-300">
+            About
+          </Link>
+          <Link href="/pricing" className="font-semibold text-base hover:text-pink-600 hover:-translate-y-0.5 transition-all duration-300">
+            Pricing
+          </Link>
+          <Link href="/portal" className="font-semibold text-base hover:text-green-600 hover:-translate-y-0.5 transition-all duration-300">
+            Portal
+          </Link>
+
+          {/* Get Started Button */}
+          <Link href="/get-started">
+            <button className="px-6 py-3 bg-yellow-300 border-3 border-black font-bold text-black hover:bg-yellow-400 hover:scale-105 hover:shadow-lg transition-all duration-300">
+              Get Started
+            </button>
+          </Link>
+        </nav>
+      </div>
+      {/* Dashed line separator */}
+      <div className="border-t-2 border-dashed border-blue-400"></div>
+    </header>
+  )
+}
+</file>
+
+<file path="src/app/components/hero.tsx">
+"use client"
+
+import Link from "next/link"
+
+export default function Hero() {
+  return (
+    <section className="bg-white py-24 px-6 overflow-hidden">
+      <div className="max-w-4xl mx-auto text-center">
+        {/* Label */}
+        <div className="mb-8 inline-block animate-scale-in opacity-0">
+          <span className="px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider">
+            PRE PRODUCTION STARTS HERE
+          </span>
+        </div>
+
+        {/* Main Heading */}
+        <h1 className="text-8xl font-anton mb-6 leading-tight tracking-tight animate-fade-in-up delay-100 opacity-0">
+          FRAMEBOARD
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-xl text-gray-600 mb-12 leading-relaxed animate-fade-in-up delay-200 opacity-0">
+          Everything you need for film pre-production, in one place–so you can focus on bringing your creative vision to
+          life.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex items-center justify-center gap-6 animate-fade-in-up delay-300 opacity-0">
+          <Link href="/get-started">
+            <button className="px-8 py-4 bg-yellow-300 border-3 border-black font-bold text-lg hover:bg-yellow-400 hover:scale-105 hover:shadow-lg transition-all duration-300">
+              Start for free
+            </button>
+          </Link>
+          <Link href="/pricing" className="font-bold text-lg flex items-center gap-2 hover:gap-4 transition-all duration-300 hover:text-blue-600">
+            Compare plans <span className="text-2xl">→</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/components/problem-section.tsx">
+"use client"
+
+import { X } from "lucide-react"
+
+export default function ProblemSection() {
+  const problems = [
+    {
+      title: "SCATTERED TOOLS KILL CREATIVITY",
+      description:
+        "Juggling shotlists, schedules, and storyboards on separate platforms breaks your creative flow and slows down your team.",
+    },
+    {
+      title: "NO UNIFIED PROJECT OVERVIEW",
+      description:
+        "It's hard to see what's ready, what's stuck, and which team members are waiting–making it difficult to keep everyone aligned.",
+    },
+    {
+      title: "TEAMS LOSE MOMENTUM",
+      description:
+        "Disorganized planning leads to lost files, missed deadlines, and frustrated teammates who lose energy before production even begins.",
+    },
+  ]
+
+  return (
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="mb-8 inline-block">
+            <span className="px-4 py-2 bg-yellow-300 border-2 border-black font-black text-sm tracking-wider">
+              PROBLEM
+            </span>
+          </div>
+          <h2 className="text-5xl font-black mb-6 leading-tight">
+            PRE-PRODUCTION
+            <br />
+            SHOULD NOT BE HARD
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Many filmmakers and teams waste time switching tools, lose track of creative assets, and struggle to keep
+            projects moving forward.
+          </p>
+        </div>
+
+        {/* Problem Cards Grid */}
+        <div className="grid grid-cols-3 gap-6">
+          {problems.map((problem, index) => (
+            <div
+              key={index}
+              className="border-4 border-black bg-white p-8 relative"
+              style={{
+                boxShadow: "4px 4px 0px rgba(0,0,0,1)",
+              }}
+            >
+              {/* Icon */}
+              <div className="mb-6">
+                <div className="w-12 h-12 rounded-full bg-yellow-300 border-2 border-black flex items-center justify-center">
+                  <X className="w-6 h-6 text-red-500" strokeWidth={3} />
+                </div>
+              </div>
+
+              {/* Title */}
+              <h3 className="font-black text-xl mb-4 leading-tight">{problem.title}</h3>
+
+              {/* Description */}
+              <p className="text-gray-600 leading-relaxed text-sm">{problem.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+</file>
+
+<file path="src/app/features/page.tsx">
+import Header from "@/app/components/header"
+import FeaturesHero from "@/app/components/features/features-hero"
+import KeyFeatures from "@/app/components/features/key-features"
+import AIFeatures from "@/app/components/features/ai-features"
+import CollaborationFeatures from "@/app/components/features/collaboration-features"
+import WorkflowSection from "@/app/components/features/workflow-section"
+import CTASection from "@/app/components/features/cta-section"
+
+export default function FeaturesPage() {
+  return (
+    <main className="bg-white">
+      <Header />
+      <FeaturesHero />
+      <KeyFeatures />
+      <AIFeatures />
+      <CollaborationFeatures />
+      <WorkflowSection />
+      <CTASection />
+    </main>
+  )
+}
+</file>
+
+<file path="src/app/get-started/page.tsx">
+import Header from "@/app/components/header"
+import GetStartedHero from "@/app/components/get-started/get-started-hero"
+import SignupForm from "@/app/components/get-started/signup-form"
+import QuickBenefits from "@/app/components/get-started/quick-benefits"
+
+export default function GetStartedPage() {
+  return (
+    <main className="min-h-screen bg-white">
+      <Header />
+      <GetStartedHero />
+      <SignupForm />
+      <QuickBenefits />
+    </main>
+  )
+}
+</file>
+
+<file path="src/app/portal/callsheet/page.tsx">
+"use client"
+
+import { useState } from "react"
+import PortalHeader from "@/app/components/portal/portal-header"
+import CallSheetForm from "@/app/components/portal/callsheet/callsheet-form"
+import CallSheetPreview from "@/app/components/portal/callsheet/callsheet-preview"
+
+export default function CallSheetPage() {
+  const [generatedCallSheet, setGeneratedCallSheet] = useState<string | null>(null)
+  const [isGenerating, setIsGenerating] = useState(false)
+
+  const handleGenerate = async (formData: any) => {
+    setIsGenerating(true)
+    try {
+      const response = await fetch('http://localhost:3001/api/callsheet/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setGeneratedCallSheet(data.callSheet.generatedContent)
+      } else {
+        alert('Failed to generate call sheet: ' + data.message)
+      }
+    } catch (error) {
+      console.error('Error generating call sheet:', error)
+      alert('Failed to generate call sheet. Please try again.')
+    } finally {
+      setIsGenerating(false)
+    }
+  }
+
+  return (
+    <main className="min-h-screen bg-gray-50">
+      <PortalHeader />
+
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="mb-8">
+          <h1 className="text-5xl font-anton mb-3 tracking-tight">GENERATE CALL SHEET</h1>
+          <p className="text-lg text-gray-600">
+            Fill in the production details below and our AI will generate a professional call sheet for you.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Form Section */}
+          <div>
+            <CallSheetForm onGenerate={handleGenerate} isGenerating={isGenerating} />
+          </div>
+
+          {/* Preview Section */}
+          <div>
+            <CallSheetPreview
+              content={generatedCallSheet}
+              isGenerating={isGenerating}
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+  )
+}
+</file>
+
+<file path="src/app/portal/page.tsx">
+import PortalHeader from "@/app/components/portal/portal-header"
+import DashboardHero from "@/app/components/portal/dashboard-hero"
+import QuickActions from "@/app/components/portal/quick-actions"
+import ProjectsOverview from "@/app/components/portal/projects-overview"
+import RecentActivity from "@/app/components/portal/recent-activity"
+
+export default function PortalPage() {
+  return (
+    <main className="min-h-screen bg-white">
+      <PortalHeader />
+      <DashboardHero />
+      <QuickActions />
+      <ProjectsOverview />
+      <RecentActivity />
+    </main>
+  )
+}
+</file>
+
+<file path="src/app/pricing/page.tsx">
+import Header from "@/app/components/header"
+import PricingHero from "@/app/components/pricing/pricing-hero"
+import PricingPlans from "@/app/components/pricing/pricing-plans"
+import FeatureComparison from "@/app/components/pricing/feature-comparison"
+import FAQSection from "@/app/components/pricing/faq-section"
+import PricingCTA from "@/app/components/pricing/pricing-cta"
+
+export default function PricingPage() {
+  return (
+    <main className="bg-white">
+      <Header />
+      <PricingHero />
+      <PricingPlans />
+      <FeatureComparison />
+      <FAQSection />
+      <PricingCTA />
+    </main>
+  )
+}
+</file>
+
+<file path="src/app/globals.css">
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Animation utilities */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-40px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(40px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+/* Stagger animation delays */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+.delay-600 {
+  animation-delay: 0.6s;
+}
+</file>
+
+<file path="src/app/layout.tsx">
+import React from "react"
+import type { Metadata } from "next"
+import "./globals.css"
+
+export const metadata: Metadata = {
+  title: "Frameboard - Film Pre-Production Made Easy",
+  description:
+    "Everything you need for film pre-production in one place. Storyboard, schedule, and manage your creative vision.",
+  generator: "v0.app",
+  icons: {
+    icon: [
+      {
+        url: "/icon-light-32x32.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icon-dark-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: "/apple-icon.png",
+  },
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en">
+      <body className="font-sans antialiased">
+        {children}
+      </body>
+    </html>
+  )
+}
+</file>
+
+<file path="src/app/page.tsx">
+import Header from "@/app/components/header"
+import Hero from "@/app/components/hero"
+import ProblemSection from "@/app/components/problem-section"
+import BenefitsSection from "@/app/components/benefits-section"
+
+export default function Home() {
+  return (
+    <main className="bg-white">
+      <Header />
+      <Hero />
+      <ProblemSection />
+      <BenefitsSection />
+    </main>
+  )
+}
+</file>
+
+<file path="next-env.d.ts">
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+import "./.next/dev/types/routes.d.ts";
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
+</file>
+
+<file path="next.config.js">
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+      },
+    ],
+  },
+}
+
+module.exports = nextConfig
+</file>
+
+<file path="package.json">
+{
+  "name": "my-v0-project",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "@radix-ui/react-accordion": "1.2.2",
+    "@radix-ui/react-alert-dialog": "1.1.4",
+    "@radix-ui/react-aspect-ratio": "1.1.1",
+    "@radix-ui/react-avatar": "1.1.2",
+    "@radix-ui/react-checkbox": "1.1.3",
+    "@radix-ui/react-collapsible": "1.1.2",
+    "@radix-ui/react-context-menu": "2.2.4",
+    "@radix-ui/react-dialog": "1.1.4",
+    "@radix-ui/react-dropdown-menu": "2.1.4",
+    "@radix-ui/react-hover-card": "1.1.4",
+    "@radix-ui/react-label": "2.1.1",
+    "@radix-ui/react-menubar": "1.1.4",
+    "@radix-ui/react-navigation-menu": "1.2.3",
+    "@radix-ui/react-popover": "1.1.4",
+    "@radix-ui/react-progress": "1.1.1",
+    "@radix-ui/react-radio-group": "1.2.2",
+    "@radix-ui/react-scroll-area": "1.2.2",
+    "@radix-ui/react-select": "2.1.4",
+    "@radix-ui/react-separator": "1.1.1",
+    "@radix-ui/react-slider": "1.2.2",
+    "@radix-ui/react-slot": "1.1.1",
+    "@radix-ui/react-switch": "1.1.2",
+    "@radix-ui/react-tabs": "1.1.2",
+    "@radix-ui/react-toast": "1.2.4",
+    "@radix-ui/react-toggle": "1.1.1",
+    "@radix-ui/react-toggle-group": "1.1.1",
+    "@radix-ui/react-tooltip": "1.1.6",
+    "@vercel/analytics": "1.3.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "1.0.4",
+    "date-fns": "4.1.0",
+    "embla-carousel-react": "8.5.1",
+    "input-otp": "1.4.1",
+    "lucide-react": "^0.454.0",
+    "next": "16.0.0",
+    "next-themes": "^0.4.6",
+    "react": "19.2.0",
+    "react-day-picker": "9.8.0",
+    "react-dom": "19.2.0",
+    "react-hook-form": "^7.60.0",
+    "react-resizable-panels": "^2.1.7",
+    "recharts": "2.15.4",
+    "sonner": "^1.7.4",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^0.9.9",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="postcss.config.mjs">
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+</file>
+
+<file path="tailwind.config.ts">
+import type { Config } from 'tailwindcss'
+
+export default {
+  content: [
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        'anton': ['Anton', 'sans-serif'],
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [],
+} satisfies Config
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+</file>
+
+</files>

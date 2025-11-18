@@ -88,32 +88,6 @@ export default function PricingCTA() {
             <p className="text-xs text-gray-600 mt-3">No credit card required</p>
           </div>
         </div>
-
-        <div className="text-center">
-          <div
-            className="inline-block border-4 border-black bg-white px-8 py-6"
-            style={{
-              boxShadow: "6px 6px 0px rgba(0,0,0,1)",
-            }}
-          >
-            <div className="flex items-center justify-center gap-12 flex-wrap">
-              <div className="text-center">
-                <div className="font-black text-3xl mb-1">500+</div>
-                <div className="text-sm text-gray-600">Happy Users</div>
-              </div>
-              <div className="w-px h-12 bg-black"></div>
-              <div className="text-center">
-                <div className="font-black text-3xl mb-1">1000+</div>
-                <div className="text-sm text-gray-600">Productions</div>
-              </div>
-              <div className="w-px h-12 bg-black"></div>
-              <div className="text-center">
-                <div className="font-black text-3xl mb-1">4.9/5</div>
-                <div className="text-sm text-gray-600">User Rating</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )

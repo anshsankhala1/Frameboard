@@ -1,8 +1,10 @@
 "use client"
 
 import { Sparkles, TrendingUp } from "lucide-react"
+import { useAuth } from "@/app/contexts/AuthContext"
 
 export default function DashboardHero() {
+  const { user } = useAuth()
   return (
     <section className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 py-12 px-6 border-b-4 border-black overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -13,7 +15,7 @@ export default function DashboardHero() {
               <span>PRO PLAN</span>
             </div>
             <h1 className="text-5xl font-anton mb-3 text-white tracking-tight">
-              WELCOME BACK, JOHN
+              WELCOME BACK, {user?.name?.toUpperCase() || 'USER'}
             </h1>
             <p className="text-lg text-white/90 mb-4">
               You have 3 active projects and 5 upcoming shoots this week.

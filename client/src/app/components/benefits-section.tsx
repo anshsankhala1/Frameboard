@@ -45,16 +45,19 @@ export default function BenefitsSection() {
               Create scenes, add visual references, and organize shotlists with an editor tailored for filmmakers.
             </p>
 
-            {/* Nested Card */}
-            <div className="border-3 border-gray-300 bg-blue-50 p-4 rounded-lg">
+            {/* Feature Preview */}
+            <div className="border-3 border-gray-300 bg-white p-4 rounded-lg">
               <div className="flex items-center gap-2 mb-3">
-                <Zap className="w-5 h-5 text-blue-600" />
-                <span className="font-bold text-sm">Basic: HTML and CSS</span>
-              </div>
-              <div className="flex gap-4 text-xs text-gray-600">
-                <span className="flex items-center gap-1">📐 2k</span>
-                <span className="flex items-center gap-1">📄 8</span>
-                <span className="flex items-center gap-1">👥 22</span>
+                <div className="w-full h-32 bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-gray-200 rounded flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-pink-400 border-2 border-black rounded mx-auto mb-2 flex items-center justify-center">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                      </svg>
+                    </div>
+                    <div className="text-xs font-semibold text-gray-600">Visual Storyboard Builder</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -141,17 +144,17 @@ export default function BenefitsSection() {
               time searching.
             </p>
 
-            {/* Leaderboard Placeholder */}
+            {/* Location Preview */}
             <div className="border-3 border-gray-300 bg-white p-4 rounded-lg text-xs">
-              <div className="font-bold mb-3">Leader Board</div>
+              <div className="font-bold mb-3">Nearby Locations</div>
               <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span>1.</span>
-                  <span className="text-gray-600">Charlie Rouard</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">📍 Warehouse District</span>
+                  <span className="text-xs bg-green-100 px-2 py-1 rounded">0.5mi</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>2.</span>
-                  <span className="text-gray-600">Ariana Agreeed</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">📍 Downtown Studio</span>
+                  <span className="text-xs bg-green-100 px-2 py-1 rounded">1.2mi</span>
                 </div>
               </div>
             </div>

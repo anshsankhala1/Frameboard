@@ -2,7 +2,6 @@ import Header from "@/app/components/header"
 import AboutHero from "@/app/components/about/about-hero"
 import WhyFrameboard from "@/app/components/about/why-frameboard"
 import TransformSection from "@/app/components/about/transform-section"
-import StatsSection from "@/app/components/about/stats-section"
 import MissionSection from "@/app/components/about/mission-section"
 import AboutCTA from "@/app/components/about/about-cta"
 
@@ -13,7 +12,6 @@ export default function AboutPage() {
       <AboutHero />
       <WhyFrameboard />
       <TransformSection />
-      <StatsSection />
       <MissionSection />
       <AboutCTA />
     </main>
