@@ -21,7 +21,7 @@ export interface StoryboardProject {
   scenes: Array<{
     scene: string;
     visualDescription: string;
-    imageUrl: string | null;
+    imageUrl?: string | null;
   }>;
 }
 

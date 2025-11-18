@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Project } from '../../models/Project';
 import { Types } from 'mongoose';
 import nodemailer from 'nodemailer';

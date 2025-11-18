@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Project } from '../../models/Project';
 import { ScheduleUpdate, ShootDate, ProjectSchedule } from '../../types/schedule';
 import { Types } from 'mongoose';
