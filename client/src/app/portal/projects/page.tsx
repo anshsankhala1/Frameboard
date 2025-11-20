@@ -133,11 +133,17 @@ export default function ProjectsPage() {
           if (scene.imageUrl) {
             try {
               const img = new Image()
-              img.crossOrigin = 'anonymous'
+              // Don't set crossOrigin for data URLs or if not needed
+              if (!scene.imageUrl.startsWith('data:')) {
+                img.crossOrigin = 'anonymous'
+              }
 
               await new Promise((resolve, reject) => {
                 img.onload = resolve
-                img.onerror = reject
+                img.onerror = (e) => {
+                  console.error('Image load error:', { url: scene.imageUrl, error: e })
+                  reject(new Error(`Failed to load image from ${scene.imageUrl}`))
+                }
                 img.src = scene.imageUrl
               })
 

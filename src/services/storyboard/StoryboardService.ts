@@ -4,13 +4,19 @@ import { StoryboardScene } from '../../types/storyboard';
 
 dotenv.config();
 
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error('OPENAI_API_KEY is required in environment variables');
-}
+let openai: OpenAI | null = null;
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+function getOpenAI(): OpenAI {
+  if (!openai) {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error('OPENAI_API_KEY is required in environment variables');
+    }
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY
+    });
+  }
+  return openai;
+}
 async function generateDalleImage(prompt: string): Promise<string | null> {
   try {
     // Make the prompt very abstract and artistic to avoid DALL-E safety violations
@@ -24,7 +30,7 @@ async function generateDalleImage(prompt: string): Promise<string | null> {
 
     const sanitizedPrompt = `Film storyboard sketch: ${abstractPrompt}. Pencil drawing style, simple composition, artistic representation.`;
 
-    const response = await openai.images.generate({
+    const response = await getOpenAI().images.generate({
       model: process.env.OPENAI_IMAGE_MODEL || "dall-e-3",
       prompt: sanitizedPrompt,
       n: 1,
@@ -44,8 +50,13 @@ async function generateDalleImage(prompt: string): Promise<string | null> {
 export class StoryboardService {
   async generateStoryboardFromScript(script: string): Promise<StoryboardScene[]> {
     try {
+      // Check if OPENAI_API_KEY is available
+      if (!process.env.OPENAI_API_KEY) {
+        throw new Error('OPENAI_API_KEY is not configured. Please add it to your environment variables to use the storyboard feature.');
+      }
+
       // First, analyze the script to break it into scenes
-      const sceneAnalysis = await openai.chat.completions.create({
+      const sceneAnalysis = await getOpenAI().chat.completions.create({
         model: "gpt-4",
         messages: [{
           role: "system",
@@ -69,7 +80,7 @@ export class StoryboardService {
       const storyboard: StoryboardScene[] = [];
 
       for (const scene of scenes) {
-        const imagePrompt = await openai.chat.completions.create({
+        const imagePrompt = await getOpenAI().chat.completions.create({
           model: "gpt-4",
           messages: [{
             role: "system",
