@@ -23,6 +23,12 @@ const io = new Server(httpServer, {
 
 // Middleware
 app.use(cors());
+
+// Special handling for Stripe webhooks - must be before express.json()
+import stripeRoutes from './api/stripe.routes';
+app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }), stripeRoutes);
+
+// JSON parsing for all other routes
 app.use(express.json());
 
 // Routes
@@ -37,6 +43,7 @@ app.use('/api/callsheet', callsheetRoutes);
 app.use('/api/storyboard', storyboardRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/projects', projectsRoutes);
+app.use('/api/stripe', stripeRoutes);
 // TODO: Add other routes when implemented
 // app.use('/api/scheduling', require('./api/scheduling'));
 // app.use('/api/crew', require('./api/crew'));

@@ -1,8 +1,79 @@
 "use client"
 
 import { Check, Sparkles, Zap, Users } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function PricingPlans() {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+
+  const handleGetStartedFree = () => {
+    router.push('/get-started')
+  }
+
+  const handleStartTrial = async () => {
+    const token = localStorage.getItem('token')
+
+    if (!token) {
+      // Not logged in, redirect to get-started
+      router.push('/get-started')
+      return
+    }
+
+    setLoading(true)
+    try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002'
+      const PRICE_ID = process.env.NEXT_PUBLIC_PRO_MONTHLY_PRICE_ID
+
+      console.log('Stripe checkout details:', {
+        apiUrl: API_URL,
+        priceId: PRICE_ID,
+        hasToken: !!token
+      })
+
+      if (!PRICE_ID) {
+        alert('Stripe is not configured. Please contact support.')
+        setLoading(false)
+        return
+      }
+
+      const response = await fetch(`${API_URL}/api/stripe/create-checkout-session`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ priceId: PRICE_ID })
+      })
+
+      console.log('Response status:', response.status)
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error('Server error:', errorText)
+        alert(`Failed to create checkout session: ${response.status}`)
+        setLoading(false)
+        return
+      }
+
+      const data = await response.json()
+      console.log('Checkout session data:', data)
+
+      if (data.url) {
+        // Redirect to Stripe checkout
+        window.location.href = data.url
+      } else {
+        console.error('No checkout URL returned')
+        alert('Failed to start checkout. Please try again.')
+      }
+    } catch (error) {
+      console.error('Error creating checkout session:', error)
+      alert('Failed to start checkout. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
     <section className="bg-white py-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -33,7 +104,10 @@ export default function PricingPlans() {
                 <p className="text-sm text-gray-600 mt-2">Forever free • Up to 5 team members</p>
               </div>
 
-              <button className="w-full px-8 py-4 bg-white border-3 border-black font-black text-lg hover:bg-gray-50 transition mb-8">
+              <button
+                onClick={handleGetStartedFree}
+                className="w-full px-8 py-4 bg-white border-3 border-black font-black text-lg hover:bg-gray-50 transition mb-8"
+              >
                 Get Started Free
               </button>
             </div>
@@ -128,10 +202,14 @@ export default function PricingPlans() {
                 </div>
               </div>
 
-              <button className="w-full px-8 py-4 bg-black text-white border-3 border-black font-black text-lg hover:bg-gray-800 transition mb-4">
-                Start 14-Day Free Trial
+              <button
+                onClick={handleStartTrial}
+                disabled={loading}
+                className="w-full px-8 py-4 bg-black text-white border-3 border-black font-black text-lg hover:bg-gray-800 transition mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Loading...' : 'Start Pro Subscription'}
               </button>
-              <p className="text-xs text-center text-gray-600">No credit card required</p>
+              <p className="text-xs text-center text-gray-600">Secure payment with Stripe</p>
             </div>
 
             <div className="space-y-4 mb-6">

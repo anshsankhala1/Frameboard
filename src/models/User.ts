@@ -7,6 +7,12 @@ export interface IUser extends Document {
   name: string;
   createdAt: Date;
   updatedAt: Date;
+  // Subscription fields
+  stripeCustomerId?: string;
+  stripeSubscriptionId?: string;
+  subscriptionStatus?: 'active' | 'canceled' | 'past_due' | 'trialing' | 'inactive';
+  subscriptionPlan?: 'free' | 'pro';
+  subscriptionCurrentPeriodEnd?: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -24,6 +30,29 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
+  },
+  // Stripe subscription fields
+  stripeCustomerId: {
+    type: String,
+    required: false
+  },
+  stripeSubscriptionId: {
+    type: String,
+    required: false
+  },
+  subscriptionStatus: {
+    type: String,
+    enum: ['active', 'canceled', 'past_due', 'trialing', 'inactive'],
+    default: 'inactive'
+  },
+  subscriptionPlan: {
+    type: String,
+    enum: ['free', 'pro'],
+    default: 'free'
+  },
+  subscriptionCurrentPeriodEnd: {
+    type: Date,
+    required: false
   }
 }, {
   timestamps: true // Automatically adds createdAt and updatedAt
