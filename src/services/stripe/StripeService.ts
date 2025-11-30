@@ -8,7 +8,7 @@ function getStripe(): Stripe {
       throw new Error('STRIPE_SECRET_KEY is required in environment variables');
     }
     stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2024-12-18.acacia',
+      apiVersion: '2025-11-17.clover',
     });
   }
   return stripe;
@@ -109,10 +109,10 @@ export class StripeService {
   async getCustomer(customerId: string): Promise<Stripe.Customer> {
     try {
       const customer = await getStripe().customers.retrieve(customerId);
-      if (customer.deleted) {
+      if ('deleted' in customer && customer.deleted) {
         throw new Error('Customer has been deleted');
       }
-      return customer;
+      return customer as Stripe.Customer;
     } catch (error) {
       console.error('Error retrieving customer:', error);
       throw error;

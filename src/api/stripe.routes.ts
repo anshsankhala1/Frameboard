@@ -201,7 +201,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
 
   user.stripeSubscriptionId = subscription.id;
   user.subscriptionStatus = subscription.status as any;
-  user.subscriptionCurrentPeriodEnd = new Date(subscription.current_period_end * 1000);
+  user.subscriptionCurrentPeriodEnd = new Date((subscription as any).current_period_end * 1000);
 
   // Update plan based on subscription status
   if (subscription.status === 'active' || subscription.status === 'trialing') {
